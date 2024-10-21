@@ -34,9 +34,9 @@ const tweetData = [
   { id: 5, region: "Mekong River", tweetFrequency: 25, dangerLevel: 15, date: "2023-06-05" },
 ];
 interface ModeProps {
-  mode: string
+  mode: string;
 }
-export function Dashboard(props: ModeProps) {
+export function Dashboard({ mode }: ModeProps) {
   const [overallDangerLevel, setOverallDangerLevel] = useState(35); // This would be calculated based on your algorithm
 
   return (
@@ -44,7 +44,7 @@ export function Dashboard(props: ModeProps) {
       <Navbar />
       <div className='p-4 space-y-4'>
         <h1 className='text-2xl font-bold'>SE Asia Conflict Analysis Dashboard</h1>
-        <h1>TEST SOCKET: {props.mode}</h1>
+        <h1>TEST SOCKET: {mode}</h1>
 
         <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
           <Card>
