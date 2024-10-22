@@ -5,29 +5,43 @@ import { useEffect, useState } from "react";
 import { socket } from "./socket.js";
 
 interface ModeProps {
-  mode: string
+  mode: string;
+}
+
+interface KeyWordArray {
+  array: KeyWordObject[];
+}
+
+interface KeyWordObject {
+  kw: KeyWord;
+}
+
+interface KeyWord {
+  kws_string: string;
 }
 export default function Home(ModeProps: ModeProps) {
   const [isConnected, setIsConnected] = useState(socket.connected);
   const [transport, setTransport] = useState(socket.io.engine.transport.name);
-  const [method, setMethod] = useState("")
+  const [method, setMethod] = useState("");
   useEffect(() => {
     socket.on("connect", () => {
       setIsConnected(true);
       console.log("Successfully Connected");
-    })
+    });
     socket.on("mode", (data: string) => {
-      setMethod(data)
-    })
+      setMethod(data);
+    });
 
-    return () => {
-      socket.off("connect")
-      socket.off("mode")
-    }
-  }, [])
+    socket.on("kws", (keyWords: any) => {
+      console.log(keyWords);
+    });
+
+    return () => {};
+  }, []);
+
   return (
     <>
-      <Dashboard  mode={method}/> <TweetDashboard />
+      <Dashboard mode={method} /> <TweetDashboard />
     </>
   );
 }
