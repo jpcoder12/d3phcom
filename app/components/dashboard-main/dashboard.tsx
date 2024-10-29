@@ -27,17 +27,23 @@ import { DangerGauge } from "./danger-gauge";
 
 // Sample data - replace this with your actual data
 const tweetData = [
-  { id: 1, region: "South China Sea", tweetFrequency: 45, dangerLevel: 30, date: "2023-06-01" },
-  { id: 2, region: "Taiwan Strait", tweetFrequency: 80, dangerLevel: 60, date: "2023-06-02" },
-  { id: 3, region: "Korean Peninsula", tweetFrequency: 32, dangerLevel: 20, date: "2023-06-03" },
-  { id: 4, region: "East China Sea", tweetFrequency: 60, dangerLevel: 45, date: "2023-06-04" },
-  { id: 5, region: "Mekong River", tweetFrequency: 25, dangerLevel: 15, date: "2023-06-05" },
+  { id: 1, Keyword: "South China Sea", Tweets: 45, dangerLevel: 30, date: "2023-06-01" },
+  { id: 2, Keyword: "Taiwan Strait", Tweets: 80, dangerLevel: 60, date: "2023-06-02" },
+  { id: 3, Keyword: "Korean Peninsula", Tweets: 32, dangerLevel: 20, date: "2023-06-03" },
+  { id: 4, Keyword: "East China Sea", Tweets: 60, dangerLevel: 45, date: "2023-06-04" },
+  { id: 5, Keyword: "Mekong River", Tweets: 25, dangerLevel: 15, date: "2023-06-05" },
 ];
-interface ModeProps {
+
+interface Props {
+  hvals: number;
   mode: string;
+  keywords: {
+    _id?: string;
+    kw_string: string;
+  }[];
 }
-export function Dashboard({ mode }: ModeProps) {
-  const [overallDangerLevel, setOverallDangerLevel] = useState(35); // This would be calculated based on your algorithm
+export function Dashboard({ mode, hvals, keywords }: Props) {
+  console.log(`dashboard, ${hvals}`);
 
   return (
     <div className='min-h-screen bg-background'>
@@ -52,23 +58,23 @@ export function Dashboard({ mode }: ModeProps) {
               <CardTitle>Overall Danger Level</CardTitle>
             </CardHeader>
             <CardContent className='flex justify-center items-center'>
-              <DangerGauge value={overallDangerLevel} size='lg' />
+              <DangerGauge value={hvals} size='lg' />
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader>
-              <CardTitle>Tweet Frequency by Region</CardTitle>
+              <CardTitle>Keywords</CardTitle>
             </CardHeader>
             <CardContent>
               <ResponsiveContainer width='100%' height={300}>
                 <BarChart data={tweetData}>
                   <CartesianGrid strokeDasharray='3 3' />
-                  <XAxis dataKey='region' />
+                  <XAxis dataKey='Keyword' />
                   <YAxis />
                   <Tooltip />
                   <Legend />
-                  <Bar dataKey='tweetFrequency' fill='#8884d8' />
+                  <Bar dataKey='Tweets' fill='#8884d8' />
                 </BarChart>
               </ResponsiveContainer>
             </CardContent>
@@ -100,19 +106,18 @@ export function Dashboard({ mode }: ModeProps) {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Region</TableHead>
+                    <TableHead>Keywords</TableHead>
                     <TableHead>Tweet Frequency</TableHead>
                     <TableHead>Danger Level</TableHead>
                     <TableHead>Date</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {tweetData.map((data) => (
-                    <TableRow key={data.id}>
-                      <TableCell>{data.region}</TableCell>
-                      <TableCell>{data.tweetFrequency}</TableCell>
-                      <TableCell>{data.dangerLevel}</TableCell>
-                      <TableCell>{data.date}</TableCell>
+                  {keywords.map((data) => (
+                    <TableRow key={data._id}>
+                      <TableCell>{data.kw_string}</TableCell>
+                      <TableCell>{data._id}</TableCell>
+                      <TableCell>{hvals}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>

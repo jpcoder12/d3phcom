@@ -6,23 +6,16 @@ import { socket } from "./socket.js";
 
 interface ModeProps {
   mode: string;
+  hvals: number;
 }
 
-interface KeyWordArray {
-  array: KeyWordObject[];
-}
-
-interface KeyWordObject {
-  kw: KeyWord;
-}
-
-interface KeyWord {
-  kws_string: string;
-}
 export default function Home(ModeProps: ModeProps) {
   const [isConnected, setIsConnected] = useState(socket.connected);
   const [transport, setTransport] = useState(socket.io.engine.transport.name);
   const [method, setMethod] = useState("");
+  const [gauge, setGauge] = useState<number>(0);
+  const [keywords, setKeywords] = useState([]);
+
   useEffect(() => {
     socket.on("connect", () => {
       setIsConnected(true);
@@ -33,7 +26,11 @@ export default function Home(ModeProps: ModeProps) {
     });
 
     socket.on("kws", (keyWords: any) => {
-      console.log(keyWords);
+      setKeywords(keyWords);
+    });
+
+    socket.on("hvals", (hvals: number) => {
+      setGauge(hvals * 10);
     });
 
     return () => {};
@@ -41,7 +38,7 @@ export default function Home(ModeProps: ModeProps) {
 
   return (
     <>
-      <Dashboard mode={method} /> <TweetDashboard />
+      <Dashboard mode={method} hvals={gauge} keywords={keywords} /> <TweetDashboard />
     </>
   );
 }
