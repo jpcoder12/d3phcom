@@ -43,7 +43,7 @@ interface Props {
   }[];
   isLoading: boolean;
 }
-export function Dashboard({ mode, hvals, keywords }: Props) {
+export function Dashboard({ mode, hvals, keywords = [], isLoading }: Props) {
   console.log(`dashboard, ${hvals}`);
 
   return (

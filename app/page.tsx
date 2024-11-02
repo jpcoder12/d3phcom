@@ -27,6 +27,10 @@ export default function Home(ModeProps: ModeProps) {
     socket.on("mode", (data: string) => {
       setMethod(data);
     });
+    socket.on("kws", (keyWords: any) => {
+      setKeywords(keyWords);
+      setIsLoading(false);
+    });
 
     socket.on("hvals", (hvals: number) => {
       setGauge(hvals * 10);
@@ -39,7 +43,7 @@ export default function Home(ModeProps: ModeProps) {
       socket.off("hvals");
     };
   }, []);
-
+  console.log(keywords);
   return (
     <>
       <Dashboard mode={method} hvals={gauge} keywords={keywords} isLoading={isLoading} />
