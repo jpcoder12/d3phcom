@@ -41,6 +41,7 @@ interface Props {
     _id?: string;
     kw_string: string;
   }[];
+  isLoading: boolean;
 }
 export function Dashboard({ mode, hvals, keywords }: Props) {
   console.log(`dashboard, ${hvals}`);
@@ -113,13 +114,14 @@ export function Dashboard({ mode, hvals, keywords }: Props) {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {keywords.map((data) => (
-                    <TableRow key={data._id}>
-                      <TableCell>{data.kw_string}</TableCell>
-                      <TableCell>{data._id}</TableCell>
-                      <TableCell>{hvals}</TableCell>
-                    </TableRow>
-                  ))}
+                  {keywords &&
+                    keywords.map((data) => (
+                      <TableRow key={data._id || data.kw_string}>
+                        <TableCell>{data.kw_string || "N/A"}</TableCell>
+                        <TableCell>{data._id || "N/A"}</TableCell>
+                        <TableCell>{hvals}</TableCell>
+                      </TableRow>
+                    ))}
                 </TableBody>
               </Table>
             </CardContent>
