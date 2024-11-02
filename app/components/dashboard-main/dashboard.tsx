@@ -42,27 +42,27 @@ export function Dashboard({ mode, hvals, keywords = [], isLoading }: DataProps) 
   console.log(`dashboard, ${hvals}`);
 
   return (
-    <div className='min-h-screen bg-background'>
-      <Navbar />
+    <div className='min-h-screen bg-black'>
+      {/* <Navbar /> */}
       <div className='p-4 space-y-4'>
-        <h1 className='text-2xl font-bold'>SE Asia Conflict Analysis Dashboard</h1>
-        <h1>TEST SOCKET: {mode}</h1>
+        <h1 className='text-2xl font-bold text-text-offWhite4'>D3PHCOM</h1>
+        <h1 className='text-2xl font-bold text-text-offWhite4'>MODE: {mode}</h1>
 
         <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-          <Card>
+          <Card className='bg-card border border-card-border rounded-lg p-4'>
             <CardHeader>
-              <CardTitle>Overall Danger Level</CardTitle>
+              <CardTitle className='text-text-offWhite4'>Overall Danger Level</CardTitle>
             </CardHeader>
             <CardContent className='flex justify-center items-center'>
               <DangerGauge value={hvals} size='lg' />
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className='bg-card border border-card-border  rounded-lg p-4'>
             <CardHeader>
-              <CardTitle>Keywords</CardTitle>
+              <CardTitle className='text-text-offWhite4'>Keywords</CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className='text-text-offWhite4'>
               <ResponsiveContainer width='100%' height={300}>
                 <BarChart data={tweetData}>
                   <CartesianGrid strokeDasharray='3 3' />
@@ -70,13 +70,13 @@ export function Dashboard({ mode, hvals, keywords = [], isLoading }: DataProps) 
                   <YAxis />
                   <Tooltip />
                   <Legend />
-                  <Bar dataKey='Tweets' fill='#8884d8' />
+                  <Bar dataKey='Tweets' fill='#25258781' />
                 </BarChart>
               </ResponsiveContainer>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className='bg-card border border-card-border  rounded-lg p-4'>
             <CardHeader>
               <CardTitle>Danger Level Trend</CardTitle>
             </CardHeader>
@@ -88,14 +88,14 @@ export function Dashboard({ mode, hvals, keywords = [], isLoading }: DataProps) 
                   <YAxis />
                   <Tooltip />
                   <Legend />
-                  <Line type='monotone' dataKey='dangerLevel' stroke='#82ca9d' />
+                  <Line type='monotone' dataKey='dangerLevel' stroke='#25258781' />
                 </LineChart>
               </ResponsiveContainer>
             </CardContent>
           </Card>
 
-          <Card>
-            <CardHeader>
+          <Card className='bg-card border border-card-border  rounded-lg p-4'>
+            <CardHeader className=''>
               <CardTitle>Regional Data</CardTitle>
             </CardHeader>
             <CardContent>
