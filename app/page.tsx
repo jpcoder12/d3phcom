@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <>
       <Dashboard mode={method} hvals={gauge} keywords={keywords} isLoading={isLoading} />
-      <TweetDashboard />
+      {/* <TweetDashboard /> */}
     </>
   );
 }

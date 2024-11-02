@@ -47,8 +47,10 @@ export function Dashboard({ mode, hvals, keywords = [], isLoading }: DataProps) 
     <div className='min-h-screen bg-black'>
       {/* <Navbar /> */}
       <div className='p-4 space-y-4'>
-        <h1 className='text-2xl font-bold text-text-offWhite4'>D3PHCOM</h1>
-        <h1 className='text-2xl font-bold text-text-offWhite4'>MODE: {mode}</h1>
+        <div className='flex justify-between py-4'>
+          <h1 className='text-2xl font-bold text-text-offWhite4'>D3PHCOM</h1>
+          <h1 className='text-2xl font-bold text-text-offWhite4'>MODE: {mode}</h1>
+        </div>
 
         <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
           <Card className='bg-card border border-card-border rounded-lg p-4'>
