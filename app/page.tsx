@@ -28,11 +28,6 @@ export default function Home(ModeProps: ModeProps) {
       setMethod(data);
     });
 
-    // socket.on("kws", (keyWords: any) => {
-    //   setKeywords(keyWords);
-    //   setIsLoading(false);
-    // });
-
     socket.on("hvals", (hvals: number) => {
       setGauge(hvals * 10);
     });
@@ -47,6 +42,7 @@ export default function Home(ModeProps: ModeProps) {
 
   return (
     <>
+      <Dashboard mode={method} hvals={gauge} keywords={keywords} isLoading={isLoading} />
       <TweetDashboard />
     </>
   );
