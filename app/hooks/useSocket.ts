@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { socket } from "../socket";
 
+// add types of updated state
 interface SocketData {
   isConnected: boolean;
   transport: string;
@@ -18,7 +19,7 @@ const useSocket = (): SocketData => {
   const [method, setMethod] = useState("");
   const [gauge, setGauge] = useState<number>(0);
   const [keywords, setKeywords] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     // Socket event listeners

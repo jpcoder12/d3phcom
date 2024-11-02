@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+// UI
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/dashboard-main/ui/card";
 import {
   LineChart,
@@ -22,8 +23,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/app/components/dashboard-main/ui/table";
+// components
 import { Navbar } from "./navbar";
 import { DangerGauge } from "./danger-gauge";
+// types
+import { DataProps } from "@/app/types";
 
 // Sample data - replace this with your actual data
 const tweetData = [
@@ -34,16 +38,7 @@ const tweetData = [
   { id: 5, Keyword: "Mekong River", Tweets: 25, dangerLevel: 15, date: "2023-06-05" },
 ];
 
-interface Props {
-  hvals: number;
-  mode: string;
-  keywords: {
-    _id?: string;
-    kw_string: string;
-  }[];
-  isLoading: boolean;
-}
-export function Dashboard({ mode, hvals, keywords = [], isLoading }: Props) {
+export function Dashboard({ mode, hvals, keywords = [], isLoading }: DataProps) {
   console.log(`dashboard, ${hvals}`);
 
   return (
