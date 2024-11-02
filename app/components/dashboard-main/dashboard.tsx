@@ -14,6 +14,8 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
+  AreaChart,
+  Area,
 } from "recharts";
 import {
   Table,
@@ -68,9 +70,23 @@ export function Dashboard({ mode, hvals, keywords = [], isLoading }: DataProps) 
                   <CartesianGrid strokeDasharray='3 3' />
                   <XAxis dataKey='Keyword' />
                   <YAxis />
-                  <Tooltip />
-                  <Legend />
-                  <Bar dataKey='Tweets' fill='#25258781' />
+                  <Tooltip
+                    contentStyle={{ backgroundColor: "black", color: "#e5e7eb" }}
+                    cursor={{ fill: "transparent" }}
+                  />
+                  <Legend
+                    fill='red'
+                    wrapperStyle={{
+                      borderRadius: 3,
+                      lineHeight: "40px",
+                      width: `20%`,
+                    }}
+                  />
+                  <Bar
+                    dataKey='Tweets'
+                    fill='#34586e7d'
+                    // activeBar={{ stroke: "red", strokeWidth: 2 }}
+                  />
                 </BarChart>
               </ResponsiveContainer>
             </CardContent>
@@ -82,14 +98,28 @@ export function Dashboard({ mode, hvals, keywords = [], isLoading }: DataProps) 
             </CardHeader>
             <CardContent>
               <ResponsiveContainer width='100%' height={300}>
-                <LineChart data={tweetData}>
+                <AreaChart data={tweetData}>
                   <CartesianGrid strokeDasharray='3 3' />
                   <XAxis dataKey='date' />
                   <YAxis />
-                  <Tooltip />
-                  <Legend />
-                  <Line type='monotone' dataKey='dangerLevel' stroke='#25258781' />
-                </LineChart>
+                  {/* styled the graph tooltip */}
+                  <Tooltip
+                    contentStyle={{ backgroundColor: "rgba(0, 0, 0, 0.8)", color: "#e5e7eb" }}
+                  />
+                  <Legend
+                    wrapperStyle={{
+                      borderRadius: 3,
+                      lineHeight: "40px",
+                      width: `20%`,
+                    }}
+                  />
+                  <Area
+                    type='monotone'
+                    dataKey='dangerLevel'
+                    stroke='#ffffffd3'
+                    fillOpacity={0.1}
+                  />
+                </AreaChart>
               </ResponsiveContainer>
             </CardContent>
           </Card>

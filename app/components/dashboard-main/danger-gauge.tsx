@@ -7,6 +7,7 @@ interface DangerGaugeProps {
   value: number;
   size?: "sm" | "md" | "lg";
   className?: string;
+  animatedValue?: number;
 }
 
 export function DangerGauge({ value, size = "md", className }: DangerGaugeProps) {
@@ -81,7 +82,7 @@ export function DangerGauge({ value, size = "md", className }: DangerGaugeProps)
           strokeWidth='10'
           strokeLinecap='round'
           strokeDasharray={`${angle} 360`}
-          strokeDashoffset='0' // Ensure full animation from 0
+          strokeDashoffset='0'
         />
       </svg>
       <div className='absolute inset-0 flex items-center justify-center'>
