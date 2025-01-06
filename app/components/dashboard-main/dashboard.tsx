@@ -40,8 +40,19 @@ const tweetData = [
 ];
 
 export function Dashboard({ mode, gauge, keywords = [], isLoading, hvals }: DataProps) {
-  console.log(`dashboard, ${gauge}`);
-  console.log(hvals);
+  // console.log(`dashboard, ${gauge}`);
+  // console.log(hvals);
+
+  const renderHvals = () => {
+    hvals.map((hval) => {
+      const date = new Date(hval.post_date);
+      const hours = date.getHours();
+      const minutes = date.getMinutes().toString().padStart(2, "0");
+      const time = `${hours}:${minutes}`;
+    });
+  };
+
+  console.log(renderHvals());
 
   return (
     <div className='min-h-screen bg-black'>

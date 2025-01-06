@@ -9,5 +9,6 @@ export interface DataProps {
   hvals: {
     _id?: string;
     final_gauge: number;
+    post_date: string;
   }[];
 }

@@ -11,7 +11,7 @@ interface SocketData {
   gauge: number;
   keywords: { _id?: string; kw_string: string }[];
   isLoading: boolean;
-  hvals: { _id?: string; final_gauge: number }[];
+  hvals: { _id?: string; final_gauge: number; post_date: string }[];
 }
 
 const useSocket = (): SocketData => {
@@ -44,6 +44,15 @@ const useSocket = (): SocketData => {
     });
 
     socket.on("hvals", (hvals) => {
+      hvals.map((hval: any) => {
+        const date = new Date(hval.post_date);
+        const hours = date.getHours();
+        const minutes = date.getMinutes().toString().padStart(2, "0");
+        const time = `${hours}:${minutes}`;
+        hval.post_date = time;
+        return hval;
+      });
+
       setHvals(hvals);
     });
 
