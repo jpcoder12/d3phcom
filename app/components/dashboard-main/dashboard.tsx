@@ -26,7 +26,6 @@ import {
   TableRow,
 } from "@/app/components/dashboard-main/ui/table";
 // components
-import { Navbar } from "./navbar";
 import { DangerGauge } from "./danger-gauge";
 // types
 import { DataProps } from "@/app/types";
@@ -40,8 +39,9 @@ const tweetData = [
   { id: 5, Keyword: "Mekong River", Tweets: 25, dangerLevel: 15, date: "2023-06-05" },
 ];
 
-export function Dashboard({ mode, hvals, keywords = [], isLoading }: DataProps) {
-  console.log(`dashboard, ${hvals}`);
+export function Dashboard({ mode, gauge, keywords = [], isLoading, hvals }: DataProps) {
+  console.log(`dashboard, ${gauge}`);
+  console.log(hvals);
 
   return (
     <div className='min-h-screen bg-black'>
@@ -58,7 +58,7 @@ export function Dashboard({ mode, hvals, keywords = [], isLoading }: DataProps) 
               <CardTitle className='text-text-offWhite4'>Overall Danger Level</CardTitle>
             </CardHeader>
             <CardContent className='flex justify-center items-center'>
-              <DangerGauge value={hvals} size='lg' />
+              <DangerGauge value={gauge} size='lg' />
             </CardContent>
           </Card>
 
@@ -100,9 +100,9 @@ export function Dashboard({ mode, hvals, keywords = [], isLoading }: DataProps) 
             </CardHeader>
             <CardContent>
               <ResponsiveContainer width='100%' height={300}>
-                <AreaChart data={tweetData}>
+                <AreaChart data={hvals.slice(0, 10)}>
                   <CartesianGrid strokeDasharray='3 3' />
-                  <XAxis dataKey='date' />
+                  <XAxis dataKey='post_date' />
                   <YAxis />
                   {/* styled the graph tooltip */}
                   <Tooltip
@@ -117,7 +117,7 @@ export function Dashboard({ mode, hvals, keywords = [], isLoading }: DataProps) 
                   />
                   <Area
                     type='monotone'
-                    dataKey='dangerLevel'
+                    dataKey='final_gauge'
                     stroke='#ffffffd3'
                     fillOpacity={0.1}
                   />
@@ -146,7 +146,7 @@ export function Dashboard({ mode, hvals, keywords = [], isLoading }: DataProps) 
                       <TableRow key={data._id || data.kw_string}>
                         <TableCell>{data.kw_string || "N/A"}</TableCell>
                         <TableCell>{data._id || "N/A"}</TableCell>
-                        <TableCell>{hvals}</TableCell>
+                        <TableCell>{gauge}</TableCell>
                       </TableRow>
                     ))}
                 </TableBody>

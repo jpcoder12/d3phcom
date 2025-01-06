@@ -6,11 +6,17 @@ import { TweetDashboard } from "./components/tweet-dashboard/tweet-dashboard";
 import useSocket from "./hooks/useSocket";
 
 export default function Home() {
-  const { method, gauge, keywords, isLoading } = useSocket();
+  const { method, gauge, keywords, isLoading, hvals } = useSocket();
 
   return (
     <>
-      <Dashboard mode={method} hvals={gauge} keywords={keywords} isLoading={isLoading} />
+      <Dashboard
+        mode={method}
+        gauge={gauge}
+        keywords={keywords}
+        isLoading={isLoading}
+        hvals={hvals}
+      />
       {/* <TweetDashboard /> */}
     </>
   );
