@@ -3,6 +3,8 @@
 
 import { Dashboard } from "./components/dashboard-main/dashboard";
 import { TweetDashboard } from "./components/tweet-dashboard/tweet-dashboard";
+import Tweets from "./components/tweets/tweets";
+
 import useSocket from "./hooks/useSocket";
 
 export default function Home() {
@@ -18,6 +20,7 @@ export default function Home() {
         hvals={hvals}
       />
       {/* <TweetDashboard /> */}
+      <Tweets />
     </>
   );
 }

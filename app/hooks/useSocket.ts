@@ -22,6 +22,7 @@ const useSocket = (): SocketData => {
   const [keywords, setKeywords] = useState([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [hvals, setHvals] = useState([]);
+  const [tweets, setTweets] = useState([]);
 
   useEffect(() => {
     // Socket event listeners
@@ -55,6 +56,15 @@ const useSocket = (): SocketData => {
 
       setHvals(hvals);
     });
+
+    // socket.on(
+    //   "tweets",
+    //   (data: { newTweets: string[]; currentPage: number; totalPages: number }) => {
+    //     setTweets(data.newTweets); // Set only the tweets
+    //     setCurrentPage(data.currentPage); // Update the current page
+    //     setTotalPages(data.totalPages); // Update the total pages
+    //   }
+    // );
 
     // Clean up socket listeners on component unmount
     return () => {
