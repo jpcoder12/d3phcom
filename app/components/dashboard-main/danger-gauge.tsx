@@ -17,10 +17,10 @@ export function DangerGauge({ value, size = "md", className }: DangerGaugeProps)
 
   // Color function for the gauge
   const getColor = (value: number) => {
-    if (value < 25) return "rgba(34, 197, 94, 0.8)"; // neon green
-    if (value < 50) return "rgba(234, 179, 8, 0.8)"; // neon yellow
-    if (value < 75) return "rgba(249, 115, 22, 0.8)"; // neon orange
-    return "rgba(239, 68, 68, 0.8)"; // neon red
+    if (value < 25) return "rgba(34, 197, 94, 0.8)";
+    if (value < 50) return "rgba(234, 179, 8, 0.8)";
+    if (value < 75) return "rgba(249, 115, 22, 0.8)";
+    return "rgba(239, 68, 68, 0.8)";
   };
 
   const sizeClasses = {

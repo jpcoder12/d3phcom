@@ -115,7 +115,7 @@ export function Dashboard({ mode, gauge, keywords = [], isLoading, hvals }: Data
                   <CartesianGrid strokeDasharray='3 3' />
                   <XAxis dataKey='post_date' />
                   <YAxis />
-                  {/* styled the graph tooltip */}
+
                   <Tooltip
                     contentStyle={{ backgroundColor: "rgba(0, 0, 0, 0.8)", color: "#e5e7eb" }}
                   />

@@ -70,7 +70,7 @@ const Tweets: React.FC = () => {
   }, []);
 
   return (
-    <div className='min-h-screen bg-gray-900 text-white'>
+    <div className='min-h-screen bg-black text-white'>
       <div className='container mx-auto p-4'>
         <h1 className='text-2xl font-bold mb-4'>Tweets</h1>
         <PaginatedCardList

@@ -12,6 +12,7 @@ interface SocketData {
   keywords: { _id?: string; kw_string: string }[];
   isLoading: boolean;
   hvals: { _id?: string; final_gauge: number; post_date: string }[];
+  tweets: any;
 }
 
 const useSocket = (): SocketData => {
@@ -22,7 +23,7 @@ const useSocket = (): SocketData => {
   const [keywords, setKeywords] = useState([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [hvals, setHvals] = useState([]);
-  const [tweets, setTweets] = useState([]);
+  const [tweets, setTweets] = useState();
 
   useEffect(() => {
     // Socket event listeners
@@ -57,14 +58,12 @@ const useSocket = (): SocketData => {
       setHvals(hvals);
     });
 
-    // socket.on(
-    //   "tweets",
-    //   (data: { newTweets: string[]; currentPage: number; totalPages: number }) => {
-    //     setTweets(data.newTweets); // Set only the tweets
-    //     setCurrentPage(data.currentPage); // Update the current page
-    //     setTotalPages(data.totalPages); // Update the total pages
-    //   }
-    // );
+    // no tweets data?
+    socket.on("tweets", (tweets) => {
+      setTweets(tweets);
+    });
+
+    console.log("get tweets", tweets);
 
     // Clean up socket listeners on component unmount
     return () => {
@@ -72,10 +71,11 @@ const useSocket = (): SocketData => {
       socket.off("mode");
       socket.off("kws");
       socket.off("hvals");
+      socket.off("tweets");
     };
   }, []);
 
-  return { isConnected, transport, method, gauge, keywords, isLoading, hvals };
+  return { isConnected, transport, method, gauge, keywords, isLoading, hvals, tweets };
 };
 
 export default useSocket;
