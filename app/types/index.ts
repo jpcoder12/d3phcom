@@ -11,6 +11,11 @@ export interface DataProps {
     final_gauge: number;
     post_date: string;
   }[];
+  tweets: {
+    newTweets: any;
+    totalPages: number;
+    currentPage: number;
+  };
 }
 
 export interface Tweet {

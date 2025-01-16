@@ -39,10 +39,7 @@ const tweetData = [
   { id: 5, Keyword: "Mekong River", Tweets: 25, dangerLevel: 15, date: "2023-06-05" },
 ];
 
-export function Dashboard({ mode, gauge, keywords = [], isLoading, hvals }: DataProps) {
-  // console.log(`dashboard, ${gauge}`);
-  // console.log(hvals);
-
+export function Dashboard({ mode, gauge, keywords = [], isLoading, hvals, tweets }: DataProps) {
   const renderHvals = () => {
     hvals.map((hval) => {
       const date = new Date(hval.post_date);
@@ -51,9 +48,7 @@ export function Dashboard({ mode, gauge, keywords = [], isLoading, hvals }: Data
       const time = `${hours}:${minutes}`;
     });
   };
-
-  console.log(renderHvals());
-
+  console.log("tweets", tweets);
   return (
     <div className='min-h-screen bg-black'>
       {/* <Navbar /> */}

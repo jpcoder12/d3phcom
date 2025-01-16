@@ -23,7 +23,7 @@ const useSocket = (): SocketData => {
   const [keywords, setKeywords] = useState([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [hvals, setHvals] = useState([]);
-  const [tweets, setTweets] = useState();
+  const [tweets, setTweets] = useState<any>({});
 
   useEffect(() => {
     // Socket event listeners
@@ -59,11 +59,9 @@ const useSocket = (): SocketData => {
     });
 
     // no tweets data?
-    socket.on("tweets", (tweets) => {
-      setTweets(tweets);
+    socket.on("tweets", (obj) => {
+      setTweets(obj);
     });
-
-    console.log("get tweets", tweets);
 
     // Clean up socket listeners on component unmount
     return () => {
@@ -73,8 +71,7 @@ const useSocket = (): SocketData => {
       socket.off("hvals");
       socket.off("tweets");
     };
-  }, []);
-
+  }, [tweets]);
   return { isConnected, transport, method, gauge, keywords, isLoading, hvals, tweets };
 };
 
