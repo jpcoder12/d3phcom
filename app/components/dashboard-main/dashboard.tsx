@@ -41,7 +41,12 @@ const tweetData = [
 
 export function Dashboard({ mode, gauge, keywords = [], hvals, tweets }: DataProps) {
   const { newTweets } = tweets;
-  console.log(newTweets);
+
+  const sortedQueryKw = Array.from(
+    new Map(newTweets.map((tweet) => [tweet.query_kw, tweet])).values()
+  );
+
+  console.log("sorted", sortedQueryKw);
   return (
     <div className='min-h-screen bg-black'>
       {/* <Navbar /> */}

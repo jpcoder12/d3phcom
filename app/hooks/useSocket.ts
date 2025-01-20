@@ -37,7 +37,6 @@ const useSocket = (): SocketData => {
 
   // Function to request tweets for a specific page
   const fetchPage = (page: number) => {
-    console.log(`Requesting tweets for page ${page}`);
     socket.emit("getTweets", { page });
   };
 
@@ -45,7 +44,6 @@ const useSocket = (): SocketData => {
     // Socket event listeners
     socket.on("connect", () => {
       setIsConnected(true);
-      console.log("Successfully Connected");
     });
 
     socket.on("mode", (data: string) => {
@@ -68,6 +66,7 @@ const useSocket = (): SocketData => {
         const minutes = date.getMinutes().toString().padStart(2, "0");
         const time = `${hours}:${minutes}`;
         hval.post_date = time;
+
         return hval;
       });
 
@@ -97,7 +96,7 @@ const useSocket = (): SocketData => {
     isLoading,
     hvals,
     tweets,
-    fetchPage, // Expose the fetchPage function
+    fetchPage,
   };
 };
 

@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "target": "es2015", // Ensures ES2015+ features like iterators are supported
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -12,6 +13,7 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "downlevelIteration": true, // Ensures iterators like Set/Map work if targeting older environments
     "plugins": [
       {
         "name": "next"
