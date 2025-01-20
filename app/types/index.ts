@@ -12,7 +12,7 @@ export interface DataProps {
     post_date: string;
   }[];
   tweets: {
-    newTweets: any;
+    newTweets: Tweet[];
     totalPages: number;
     currentPage: number;
   };

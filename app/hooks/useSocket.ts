@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { socket } from "../socket";
+import type { Tweet } from "../types";
 
 // add types of updated state
 interface SocketData {
@@ -12,7 +13,11 @@ interface SocketData {
   keywords: { _id?: string; kw_string: string }[];
   isLoading: boolean;
   hvals: { _id?: string; final_gauge: number; post_date: string }[];
-  tweets: any;
+  tweets: {
+    newTweets: Tweet[];
+    totalPages: number;
+    currentPage: number;
+  };
 }
 
 const useSocket = (): SocketData => {
