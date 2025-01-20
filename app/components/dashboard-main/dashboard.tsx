@@ -39,16 +39,9 @@ const tweetData = [
   { id: 5, Keyword: "Mekong River", Tweets: 25, dangerLevel: 15, date: "2023-06-05" },
 ];
 
-export function Dashboard({ mode, gauge, keywords = [], isLoading, hvals, tweets }: DataProps) {
-  const renderHvals = () => {
-    hvals.map((hval) => {
-      const date = new Date(hval.post_date);
-      const hours = date.getHours();
-      const minutes = date.getMinutes().toString().padStart(2, "0");
-      const time = `${hours}:${minutes}`;
-    });
-  };
-  console.log("tweets", tweets);
+export function Dashboard({ mode, gauge, keywords = [], hvals, tweets }: DataProps) {
+  const { newTweets } = tweets;
+  console.log(newTweets);
   return (
     <div className='min-h-screen bg-black'>
       {/* <Navbar /> */}
@@ -70,9 +63,9 @@ export function Dashboard({ mode, gauge, keywords = [], isLoading, hvals, tweets
 
           <Card className='bg-card border border-card-border  rounded-lg p-4'>
             <CardHeader>
-              <CardTitle className='text-text-offWhite4'>Keywords</CardTitle>
+              <CardTitle className='text-gray-400'>Keywords</CardTitle>
             </CardHeader>
-            <CardContent className='text-text-offWhite4'>
+            <CardContent className='text-gray-400'>
               <ResponsiveContainer width='100%' height={300}>
                 <BarChart data={tweetData}>
                   <CartesianGrid strokeDasharray='3 3' />
@@ -93,7 +86,7 @@ export function Dashboard({ mode, gauge, keywords = [], isLoading, hvals, tweets
                   <Bar
                     dataKey='Tweets'
                     fill='#34586e7d'
-                    // activeBar={{ stroke: "red", strokeWidth: 2 }}
+                    activeBar={{ stroke: "white", strokeWidth: 1 }}
                   />
                 </BarChart>
               </ResponsiveContainer>
@@ -102,7 +95,7 @@ export function Dashboard({ mode, gauge, keywords = [], isLoading, hvals, tweets
 
           <Card className='bg-card border border-card-border  rounded-lg p-4'>
             <CardHeader>
-              <CardTitle>Danger Level Trend</CardTitle>
+              <CardTitle className='text-gray-400'>Danger Level Trend</CardTitle>
             </CardHeader>
             <CardContent>
               <ResponsiveContainer width='100%' height={300}>
@@ -134,14 +127,14 @@ export function Dashboard({ mode, gauge, keywords = [], isLoading, hvals, tweets
 
           <Card className='bg-card border border-card-border  rounded-lg p-4'>
             <CardHeader className=''>
-              <CardTitle>Regional Data</CardTitle>
+              <CardTitle className='text-gray-400'>Regional Data</CardTitle>
             </CardHeader>
             <CardContent>
               <Table>
                 <TableHeader>
-                  <TableRow>
+                  <TableRow className='text-gray-400'>
                     <TableHead>Keywords</TableHead>
-                    <TableHead>Tweet Frequency</TableHead>
+                    <TableHead>Tweet ID</TableHead>
                     <TableHead>Danger Level</TableHead>
                     <TableHead>Date</TableHead>
                   </TableRow>
@@ -149,7 +142,7 @@ export function Dashboard({ mode, gauge, keywords = [], isLoading, hvals, tweets
                 <TableBody>
                   {keywords &&
                     keywords.map((data) => (
-                      <TableRow key={data._id || data.kw_string}>
+                      <TableRow className='text-gray-400' key={data._id || data.kw_string}>
                         <TableCell>{data.kw_string || "N/A"}</TableCell>
                         <TableCell>{data._id || "N/A"}</TableCell>
                         <TableCell>{gauge}</TableCell>

@@ -8,20 +8,26 @@ export interface PaginatedCardListProps {
     totalPages: number;
     currentPage: number;
   };
+  onPageChange: (page: number) => void;
 }
 
-export function PaginatedCardList({ tweets }: PaginatedCardListProps) {
+export function PaginatedCardList({ tweets, onPageChange }: PaginatedCardListProps) {
   const { newTweets = [], currentPage = 1, totalPages = 1 } = tweets || {};
+
   return (
     <div className='space-y-6'>
+      {/* Grid of tweets */}
       <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
-        {newTweets.slice(0, 9).map((tweet) => (
-          <TweetCard key={tweet._id.$oid} tweet={tweet} />
+        {newTweets.map((tweet) => (
+          <TweetCard key={tweet.tweet_id} tweet={tweet} />
         ))}
       </div>
-      <div className='flex justify-between items-center mt-4'>
+
+      {/* Pagination controls */}
+      <div className='flex justify-around items-center mt-4'>
         <Button
-          // onClick={() => onPageChange(currentPage - 1)}
+          className='bg-card border border-card-border  rounded-lg'
+          onClick={() => onPageChange(currentPage - 1)}
           disabled={currentPage === 1}
           variant='outline'>
           Previous
@@ -30,9 +36,10 @@ export function PaginatedCardList({ tweets }: PaginatedCardListProps) {
           Page {currentPage} of {totalPages}
         </span>
         <Button
-          // onClick={() => onPageChange(currentPage + 1)}
+          onClick={() => onPageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
-          variant='outline'>
+          variant='outline'
+          className='bg-card border border-card-border rounded-lg'>
           Next
         </Button>
       </div>

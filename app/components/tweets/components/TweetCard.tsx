@@ -6,12 +6,9 @@ interface TweetCardProps {
 }
 
 export function TweetCard({ tweet }: TweetCardProps) {
-  // const date = new Date(parseInt(tweet.post_date.$date.$numberLong));
-
   return (
-    <Card className='w-full h-full flex flex-col'>
-      <CardContent className='flex-grow pt-4'>
-        {/* <p className='text-sm text-gray-500 mb-2'>{date.toLocaleString()}</p> */}
+    <Card className='w-full h-full flex flex-col bg-card border border-card-border  rounded-lg'>
+      <CardContent className='flex-grow pt-4 text-gray-400'>
         <p className='text-base'>{tweet.text}</p>
       </CardContent>
       <CardFooter className='text-sm text-gray-400'>

@@ -21,7 +21,7 @@ export default function Home() {
         tweets={tweets}
       />
       {/* <TweetDashboard /> */}
-      <Tweets tweets={tweets} />
+      <Tweets />
     </>
   );
 }

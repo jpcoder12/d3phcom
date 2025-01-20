@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { socket } from "../socket";
 import type { Tweet } from "../types";
 
-// add types of updated state
+// Define the structure of the socket data
 interface SocketData {
   isConnected: boolean;
   transport: string;
@@ -18,6 +18,7 @@ interface SocketData {
     totalPages: number;
     currentPage: number;
   };
+  fetchPage: (page: number) => void; // Function to request a specific page
 }
 
 const useSocket = (): SocketData => {
@@ -28,7 +29,17 @@ const useSocket = (): SocketData => {
   const [keywords, setKeywords] = useState([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [hvals, setHvals] = useState([]);
-  const [tweets, setTweets] = useState<any>({});
+  const [tweets, setTweets] = useState<any>({
+    newTweets: [],
+    totalPages: 1,
+    currentPage: 1,
+  });
+
+  // Function to request tweets for a specific page
+  const fetchPage = (page: number) => {
+    console.log(`Requesting tweets for page ${page}`);
+    socket.emit("getTweets", { page });
+  };
 
   useEffect(() => {
     // Socket event listeners
@@ -63,12 +74,11 @@ const useSocket = (): SocketData => {
       setHvals(hvals);
     });
 
-    // no tweets data?
     socket.on("tweets", (obj) => {
+      console.log("Received tweets data:", obj);
       setTweets(obj);
     });
 
-    // Clean up socket listeners on component unmount
     return () => {
       socket.off("connect");
       socket.off("mode");
@@ -76,8 +86,19 @@ const useSocket = (): SocketData => {
       socket.off("hvals");
       socket.off("tweets");
     };
-  }, [tweets]);
-  return { isConnected, transport, method, gauge, keywords, isLoading, hvals, tweets };
+  }, []);
+
+  return {
+    isConnected,
+    transport,
+    method,
+    gauge,
+    keywords,
+    isLoading,
+    hvals,
+    tweets,
+    fetchPage, // Expose the fetchPage function
+  };
 };
 
 export default useSocket;

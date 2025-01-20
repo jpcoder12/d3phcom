@@ -2,35 +2,37 @@
 
 import { useState, useEffect } from "react";
 import { PaginatedCardList } from "./components/PaginatedCardList";
-import { Tweet } from "@/app/types";
+import useSocket from "@/app/hooks/useSocket";
 
-export interface PaginatedCardListProps {
-  tweets: {
-    newTweets: Tweet[];
-    totalPages: number;
-    currentPage: number;
+const Tweets: React.FC = () => {
+  const { tweets, fetchPage } = useSocket();
+  const [currentPageIndex, setCurrentPageIndex] = useState(1);
+  const { newTweets, totalPages, currentPage } = tweets;
+  const handlePageChange = (page: number) => {
+    setCurrentPageIndex(page);
+    fetchPage(page);
   };
-}
 
-export interface TweetDataProps {
-  tweets: {
-    newTweets: Tweet[];
-    totalPages: number;
-    currentPage: number;
-  };
-}
+  if (!tweets || tweets.newTweets.length === 0) {
+    return (
+      <div className='min-h-screen bg-black text-white flex items-center justify-center'>
+        <p>Loading tweets...</p>
+      </div>
+    );
+  }
 
-const Tweets: React.FC<TweetDataProps> = ({ tweets }) => {
-  // const [currentPage, setCurrentPage] = useState(1);
-  const [tweetsData, setTweetsData] = useState([]);
-  // const [totalPages, setTotalPages] = useState(1);
-  const pageSize = 9;
-  console.log(" data passed to tweets layout", tweets);
   return (
-    <div className='min-h-screen bg-black text-white'>
-      <div className='container mx-auto p-4'>
+    <div className='bg-black text-gray-400'>
+      <div className='p-4'>
         <h1 className='text-2xl font-bold mb-4'>Tweets</h1>
-        <PaginatedCardList tweets={tweets} />
+        <PaginatedCardList
+          tweets={{
+            newTweets: newTweets,
+            totalPages: totalPages,
+            currentPage: currentPage,
+          }}
+          onPageChange={handlePageChange}
+        />
       </div>
     </div>
   );
