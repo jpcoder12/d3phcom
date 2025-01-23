@@ -1,5 +1,5 @@
 "use client";
-
+import { socket } from "@/app/socket";
 import { useState, useEffect } from "react";
 import { PaginatedCardList } from "./components/PaginatedCardList";
 import useSocket from "@/app/hooks/useSocket";
@@ -8,10 +8,16 @@ const Tweets: React.FC = () => {
   const { tweets, fetchPage } = useSocket();
   const [currentPageIndex, setCurrentPageIndex] = useState(1);
   const { newTweets, totalPages, currentPage } = tweets;
-  const handlePageChange = (page: number) => {
-    setCurrentPageIndex(page);
-    fetchPage(page);
+  // const handlePageChange = (page: number) => {
+  //   setCurrentPageIndex(page);
+  //   fetchPage(page);
+  // };
+
+  const handlePageChange = () => {
+    socket.emit("getTweets", { page: currentPageIndex, limit: 9 });
   };
+
+  console.log("got pages", handlePageChange());
 
   if (!tweets || tweets.newTweets.length === 0) {
     return (
