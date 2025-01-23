@@ -84,18 +84,13 @@ const useSocket = (): SocketData => {
         post_date: formatDate(hval.post_date),
       }));
 
-      setHvals(formattedHvals);
+      setHvals(formattedHvals.reverse());
       console.log("Formatted hvals:", formattedHvals);
 
       // Update gauge if needed
       if (formattedHvals.length > 0) {
         setGauge(formattedHvals[0].final_gauge * 10);
       }
-    });
-
-    socket.on("tweets", (obj: { newTweets: Tweet[]; totalPages: number; currentPage: number }) => {
-      console.log("Received tweets data:", obj);
-      setTweets(obj);
     });
 
     return () => {

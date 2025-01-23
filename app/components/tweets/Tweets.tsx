@@ -2,27 +2,49 @@
 import { socket } from "@/app/socket";
 import { useState, useEffect } from "react";
 import { PaginatedCardList } from "./components/PaginatedCardList";
-import useSocket from "@/app/hooks/useSocket";
+import { SkeletonCard } from "../ui/skeleton";
 
 const Tweets: React.FC = () => {
-  const { tweets, fetchPage } = useSocket();
+  const [tweets, setTweets] = useState({
+    newTweets: [],
+    totalPages: 1,
+    currentPage: 1,
+  });
   const [currentPageIndex, setCurrentPageIndex] = useState(1);
-  const { newTweets, totalPages, currentPage } = tweets;
-  // const handlePageChange = (page: number) => {
-  //   setCurrentPageIndex(page);
-  //   fetchPage(page);
-  // };
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handlePageChange = () => {
-    socket.emit("getTweets", { page: currentPageIndex, limit: 9 });
+  // Fetch tweets for the current page
+  const fetchTweets = (page: number) => {
+    setIsLoading(true);
+    socket.emit("getTweets", { page, limit: 9 });
   };
 
-  console.log("got pages", handlePageChange());
+  // Listen for tweets from the server
+  useEffect(() => {
+    socket.on("tweets", (data) => {
+      setTweets(data);
+      setCurrentPageIndex(data.currentPage);
+      setIsLoading(false);
+    });
 
-  if (!tweets || tweets.newTweets.length === 0) {
+    // Fetch initial tweets
+    fetchTweets(currentPageIndex);
+
+    // Cleanup listener on unmount
+    return () => {
+      socket.off("tweets");
+    };
+  }, []);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPageIndex(page);
+    fetchTweets(page);
+  };
+
+  if (isLoading) {
     return (
       <div className='min-h-screen bg-black text-white flex items-center justify-center'>
-        <p>Loading tweets...</p>
+        <SkeletonCard />
       </div>
     );
   }
@@ -31,14 +53,7 @@ const Tweets: React.FC = () => {
     <div className='bg-black text-gray-400'>
       <div className='p-4'>
         <h1 className='text-2xl font-bold mb-4'>Tweets</h1>
-        <PaginatedCardList
-          tweets={{
-            newTweets: newTweets,
-            totalPages: totalPages,
-            currentPage: currentPage,
-          }}
-          onPageChange={handlePageChange}
-        />
+        <PaginatedCardList tweets={tweets} onPageChange={handlePageChange} isLoading={isLoading} />
       </div>
     </div>
   );

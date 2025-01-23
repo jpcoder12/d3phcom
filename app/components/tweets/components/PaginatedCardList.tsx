@@ -1,4 +1,5 @@
 import { Button } from "../../ui/button";
+import { SkeletonCard } from "../../ui/skeleton";
 import { TweetCard } from "./TweetCard";
 import { Tweet } from "@/app/types";
 
@@ -8,20 +9,25 @@ export interface PaginatedCardListProps {
     totalPages: number;
     currentPage: number;
   };
+  isLoading: boolean;
   onPageChange: (page: number) => void;
 }
 
-export function PaginatedCardList({ tweets, onPageChange }: PaginatedCardListProps) {
+export function PaginatedCardList({ tweets, onPageChange, isLoading }: PaginatedCardListProps) {
   const { newTweets = [], currentPage = 1, totalPages = 1 } = tweets || {};
 
   return (
     <div className='space-y-6'>
       {/* Grid of tweets */}
-      <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
-        {newTweets.map((tweet) => (
-          <TweetCard key={tweet.tweet_id} tweet={tweet} />
-        ))}
-      </div>
+      {isLoading ? (
+        <SkeletonCard />
+      ) : (
+        <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
+          {newTweets.map((tweet) => (
+            <TweetCard key={tweet.tweet_id} tweet={tweet} />
+          ))}
+        </div>
+      )}
 
       {/* Pagination controls */}
       <div className='flex justify-around items-center mt-4'>
