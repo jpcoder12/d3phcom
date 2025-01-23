@@ -46,7 +46,7 @@ export function Dashboard({ mode, gauge, keywords = [], hvals, tweets }: DataPro
     new Map(newTweets.map((tweet) => [tweet.query_kw, tweet])).values()
   );
 
-  console.log("sorted", sortedQueryKw);
+  // console.log("sorted", hvals);
   return (
     <div className='min-h-screen bg-black'>
       {/* <Navbar /> */}
