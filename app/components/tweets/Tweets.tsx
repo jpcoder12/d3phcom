@@ -1,8 +1,8 @@
 "use client";
+
 import { socket } from "@/app/socket";
 import { useState, useEffect } from "react";
 import { PaginatedCardList } from "./components/PaginatedCardList";
-import { SkeletonCard } from "../ui/skeleton";
 
 const Tweets: React.FC = () => {
   const [tweets, setTweets] = useState({
@@ -11,7 +11,7 @@ const Tweets: React.FC = () => {
     currentPage: 1,
   });
   const [currentPageIndex, setCurrentPageIndex] = useState(1);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   // Fetch tweets for the current page
   const fetchTweets = (page: number) => {
@@ -27,32 +27,26 @@ const Tweets: React.FC = () => {
       setIsLoading(false);
     });
 
-    // Fetch initial tweets
     fetchTweets(currentPageIndex);
 
-    // Cleanup listener on unmount
     return () => {
       socket.off("tweets");
     };
-  }, []);
+  }, [currentPageIndex]);
 
   const handlePageChange = (page: number) => {
     setCurrentPageIndex(page);
     fetchTweets(page);
   };
 
-  if (isLoading) {
-    return (
-      <div className='min-h-screen bg-black text-white flex items-center justify-center'>
-        <SkeletonCard />
-      </div>
-    );
-  }
-
   return (
-    <div className='bg-black h-full flex align-middle text-gray-400 overflow-hidden'>
+    <div className='bg-black  flex align-middle justify-center text-gray-400 m:mt-8'>
       <div className='p-4 flex items-center'>
-        <PaginatedCardList tweets={tweets} onPageChange={handlePageChange} isLoading={isLoading} />
+        <PaginatedCardList
+          tweets={tweets}
+          onPageChange={handlePageChange}
+          isLoading={isLoading} // Pass the loading state to the child component
+        />
       </div>
     </div>
   );

@@ -1,8 +1,8 @@
 "use client";
 
 import { Button } from "../../ui/button";
-import { SkeletonCard } from "../../ui/skeleton";
-import { TweetCard } from "./TweetCard";
+import { SkeletonCard } from "../../ui/skeleton"; // Import the SkeletonCard
+import { TweetCard } from "./TweetCard"; // Import the TweetCard component
 import { Tweet } from "@/app/types";
 
 export interface PaginatedCardListProps {
@@ -20,11 +20,15 @@ export function PaginatedCardList({ tweets, onPageChange, isLoading }: Paginated
 
   return (
     <div className='space-y-6'>
-      {/* Grid of tweets */}
       {isLoading ? (
-        <SkeletonCard />
+        <div className='grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3  gap-4'>
+          {[...Array(9)].map((_, index) => (
+            <SkeletonCard key={index} />
+          ))}
+        </div>
       ) : (
-        <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
+        <div className='grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-4'>
+          {/* Render actual TweetCards */}
           {newTweets.map((tweet) => (
             <TweetCard key={tweet.tweet_id} tweet={tweet} />
           ))}
@@ -32,15 +36,15 @@ export function PaginatedCardList({ tweets, onPageChange, isLoading }: Paginated
       )}
 
       {/* Pagination controls */}
-      <div className='flex justify-around items-center mt-4'>
+      <div className='flex justify-between items-center mt-8'>
         <Button
-          className='bg-card border border-card-border  rounded-lg'
+          className='bg-card border border-card-border rounded-lg'
           onClick={() => onPageChange(currentPage - 1)}
           disabled={currentPage === 1}
           variant='outline'>
           Previous
         </Button>
-        <span className='text-gray-400'>
+        <span className='text-gray-400 sm:text-xs'>
           Page {currentPage} of {totalPages}
         </span>
         <Button
