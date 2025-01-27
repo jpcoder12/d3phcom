@@ -46,15 +46,13 @@ export function Dashboard({ mode, gauge, keywords = [], hvals, tweets }: DataPro
     new Map(newTweets.map((tweet) => [tweet.query_kw, tweet])).values()
   );
 
-  // console.log("sorted", hvals);
   return (
     <div className='min-h-screen bg-black'>
       {/* <Navbar /> */}
-      <div className='p-4 space-y-4'>
-        <div className='flex justify-between py-4'>
-          <h1 className='text-2xl font-bold text-text-offWhite4'>D3PHCOM</h1>
+      <div className='px-4 pb-4 space-y-4'>
+        {/* <div className='flex justify-between py-4'>
           <h1 className='text-2xl font-bold text-text-offWhite4'>MODE: {mode}</h1>
-        </div>
+        </div> */}
 
         <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
           <Card className='bg-card border border-card-border rounded-lg p-4'>
@@ -98,7 +96,7 @@ export function Dashboard({ mode, gauge, keywords = [], hvals, tweets }: DataPro
             </CardContent>
           </Card>
 
-          <Card className='bg-card border border-card-border  rounded-lg p-4'>
+          <Card className='bg-card border border-card-border rounded-lg p-4'>
             <CardHeader>
               <CardTitle className='text-gray-400'>Danger Level Trend</CardTitle>
             </CardHeader>
