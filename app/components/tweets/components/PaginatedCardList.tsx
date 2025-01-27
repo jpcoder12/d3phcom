@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "../../ui/button";
 import { SkeletonCard } from "../../ui/skeleton";
 import { TweetCard } from "./TweetCard";

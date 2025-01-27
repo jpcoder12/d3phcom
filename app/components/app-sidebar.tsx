@@ -1,3 +1,5 @@
+"use client";
+
 import type * as React from "react";
 import { Home, Settings, User, HelpCircle, BookCopy } from "lucide-react";
 import Link from "next/link";
@@ -18,7 +20,7 @@ import {
 const navItems = [
   { icon: Home, label: "Dashboard", href: "/" },
   { icon: BookCopy, label: "Tweets", href: "/tweet-page" },
-  { icon: User, label: "Profile", href: "/dashboard" },
+  { icon: User, label: "Profile", href: "/" },
   { icon: Settings, label: "Settings", href: "/settings" },
   { icon: HelpCircle, label: "Help", href: "/help" },
 ];
@@ -29,14 +31,15 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarHeader className='border-b border-black bg-black'></SidebarHeader>
       <SidebarContent className='bg-black border-card'>
         <SidebarGroup className='bg-black '>
-          <SidebarGroupLabel className='text-gray-400 hover:bg-black'>D3phcom</SidebarGroupLabel>
+          <SidebarGroupLabel className='text-gray-400 text-xl '>D3phcom</SidebarGroupLabel>
           <SidebarGroupContent className='bg-black hover:bg-black'>
-            <SidebarMenu>
+            <SidebarMenu className='mt-2'>
               {navItems.map((item) => (
                 <SidebarMenuItem key={item.label}>
-                  <SidebarMenuButton asChild>
+                  <SidebarMenuButton asChild className='hover:bg-black '>
                     <Link
                       href={item.href}
+                      passHref
                       className='flex items-center gap-3 text-gray-400 hover:bg-black hover:text-white bg-black'>
                       <item.icon className='h-4 w-4' />
                       <span>{item.label}</span>

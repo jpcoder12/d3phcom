@@ -1,3 +1,5 @@
+"use client";
+
 import { Card, CardContent, CardFooter } from "../../ui/card";
 import { Tweet } from "@/app/types";
 

@@ -2,10 +2,6 @@
 "use client";
 
 import { Dashboard } from "./components/dashboard-main/dashboard";
-import { TweetDashboard } from "./components/tweet-dashboard/tweet-dashboard";
-import Tweets from "./components/tweets/Tweets";
-import { Button } from "@/components/ui/button";
-import { SidebarInset, useSidebar } from "@/components/ui/sidebar";
 
 import useSocket from "./hooks/useSocket";
 
@@ -22,8 +18,6 @@ export default function Home() {
         hvals={hvals}
         tweets={tweets}
       />
-      {/* <TweetDashboard /> */}
-      <Tweets />
     </>
   );
 }

@@ -50,9 +50,8 @@ const Tweets: React.FC = () => {
   }
 
   return (
-    <div className='bg-black text-gray-400'>
-      <div className='p-4'>
-        <h1 className='text-2xl font-bold mb-4'>Tweets</h1>
+    <div className='bg-black h-full flex align-middle text-gray-400 overflow-hidden'>
+      <div className='p-4 flex items-center'>
         <PaginatedCardList tweets={tweets} onPageChange={handlePageChange} isLoading={isLoading} />
       </div>
     </div>

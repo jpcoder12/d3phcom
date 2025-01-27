@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+
 // UI
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/dashboard-main/ui/card";
 import {
@@ -49,7 +50,8 @@ export function Dashboard({ mode, gauge, keywords = [], hvals, tweets }: DataPro
   return (
     <div className='min-h-screen bg-black'>
       {/* <Navbar /> */}
-      <div className='px-4 pb-4 space-y-4'>
+
+      <div className='px-4 pb-4'>
         {/* <div className='flex justify-between py-4'>
           <h1 className='text-2xl font-bold text-text-offWhite4'>MODE: {mode}</h1>
         </div> */}

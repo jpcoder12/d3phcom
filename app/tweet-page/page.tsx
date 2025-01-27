@@ -1,4 +1,4 @@
-"use client";
+" use client";
 
 import React from "react";
 import Tweets from "@/app/components/tweets/Tweets";
