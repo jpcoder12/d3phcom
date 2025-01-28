@@ -28,7 +28,6 @@ export function PaginatedCardList({ tweets, onPageChange, isLoading }: Paginated
         </div>
       ) : (
         <div className='grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-4'>
-          {/* Render actual TweetCards */}
           {newTweets.map((tweet) => (
             <TweetCard key={tweet.tweet_id} tweet={tweet} />
           ))}
@@ -40,7 +39,7 @@ export function PaginatedCardList({ tweets, onPageChange, isLoading }: Paginated
         <Button
           className='bg-card border border-card-border rounded-lg'
           onClick={() => onPageChange(currentPage - 1)}
-          disabled={currentPage === 1}
+          disabled={isLoading || currentPage === 1}
           variant='outline'>
           Previous
         </Button>
@@ -49,7 +48,7 @@ export function PaginatedCardList({ tweets, onPageChange, isLoading }: Paginated
         </span>
         <Button
           onClick={() => onPageChange(currentPage + 1)}
-          disabled={currentPage === totalPages}
+          disabled={isLoading || currentPage === totalPages}
           variant='outline'
           className='bg-card border border-card-border rounded-lg'>
           Next
