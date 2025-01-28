@@ -1,23 +1,19 @@
-// src/app/page.tsx
 "use client";
 
 import { Dashboard } from "./components/dashboard-main/dashboard";
-
-import useSocket from "./hooks/useSocket";
+import { useWebSocket } from "./context/WebSocketContext";
 
 export default function Home() {
-  const { method, gauge, keywords, isLoading, hvals, tweets } = useSocket();
+  const { method, gauge, keywords, isLoading, hvals, tweets } = useWebSocket();
 
   return (
-    <>
-      <Dashboard
-        mode={method}
-        gauge={gauge}
-        keywords={keywords}
-        isLoading={isLoading}
-        hvals={hvals}
-        tweets={tweets}
-      />
-    </>
+    <Dashboard
+      mode={method}
+      gauge={gauge}
+      keywords={keywords}
+      isLoading={isLoading}
+      hvals={hvals}
+      tweets={tweets}
+    />
   );
 }
