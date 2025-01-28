@@ -48,7 +48,7 @@ export function Dashboard({ mode, gauge, keywords = [], hvals, tweets }: DataPro
   );
 
   return (
-    <div className='min-h-screen bg-black'>
+    <div className=' bg-black'>
       {/* <Navbar /> */}
 
       <div className='px-4 pb-4'>

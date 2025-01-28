@@ -28,7 +28,7 @@ const navItems = [
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar className='bg-black text-white border-card' {...props}>
-      <SidebarHeader className='border-b border-black bg-black'></SidebarHeader>
+      <SidebarHeader className='border-b border-black bg-black '></SidebarHeader>
       <SidebarContent className='bg-black border-card'>
         <SidebarGroup className='bg-black '>
           <SidebarGroupLabel className='text-gray-400 text-xl '>D3phcom</SidebarGroupLabel>

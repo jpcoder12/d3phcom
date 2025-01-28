@@ -92,6 +92,7 @@ const config: Config = {
         "glow-lg": "0px 6px 15px rgba(100, 200, 255, 0.3)",
       },
       screens: {
+        xxs: "320px",
         xs: "480px", // Extra small screen
         sm: "640px", // Small screen (default Tailwind)
         md: "768px", // Medium screen (default Tailwind)

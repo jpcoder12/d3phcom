@@ -15,7 +15,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <SidebarProvider defaultOpen={false}>
             <AppSidebar />
             <SidebarInset className='flex flex-col flex-1 border-card-border'>
-              <header className='flex h-14 lg:h-[60px] items-center gap-4 border-gray-800 bg-black px-6'>
+              <header className='flex h-14 lg:h-[60px] items-center gap-4 border-gray-800  px-6 fixed w-full'>
                 <SidebarTrigger className='text-white' />
                 <div className='flex-1'>{/* Add your header content here */}</div>
               </header>
