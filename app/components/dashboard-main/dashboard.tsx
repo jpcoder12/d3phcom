@@ -49,8 +49,6 @@ export function Dashboard({ mode, gauge, keywords = [], hvals, tweets }: DataPro
 
   return (
     <div className=' bg-black'>
-      {/* <Navbar /> */}
-
       <div className='px-4 pb-4'>
         {/* <div className='flex justify-between py-4'>
           <h1 className='text-2xl font-bold text-text-offWhite4'>MODE: {mode}</h1>
