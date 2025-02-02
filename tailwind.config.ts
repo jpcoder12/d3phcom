@@ -96,7 +96,7 @@ const config: Config = {
         xs: "480px", // Extra small screen
         sm: "640px", // Small screen (default Tailwind)
         md: "768px", // Medium screen (default Tailwind)
-        lg: "1024px", // Large screen (default Tailwind)
+        lg: "1124px", // Large screen (default Tailwind)
         xl: "1280px", // Extra large screen (default Tailwind)
         "2xl": "1536px", // 2x large screen (default Tailwind)
         "3xl": "1920px", // 3x large screen for larger monitors
