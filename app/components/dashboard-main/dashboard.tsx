@@ -50,14 +50,10 @@ export function Dashboard({ mode, gauge, keywords = [], hvals, tweets }: DataPro
   return (
     <div className=' bg-black'>
       <div className='px-4 pb-4'>
-        {/* <div className='flex justify-between py-4'>
-          <h1 className='text-2xl font-bold text-text-offWhite4'>MODE: {mode}</h1>
-        </div> */}
-
         <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
           <Card className='bg-card border border-card-border rounded-lg p-4'>
             <CardHeader>
-              <CardTitle className='text-text-offWhite4'>Overall Danger Level</CardTitle>
+              <CardTitle className='text-text-offWhite4 pb-12'>Overall Danger Level</CardTitle>
             </CardHeader>
             <CardContent className='flex justify-center items-center'>
               <DangerGauge value={gauge} size='lg' />

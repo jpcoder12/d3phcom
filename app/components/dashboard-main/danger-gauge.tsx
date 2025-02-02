@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
@@ -7,13 +5,11 @@ interface DangerGaugeProps {
   value: number;
   size?: "sm" | "md" | "lg";
   className?: string;
-  animatedValue?: number;
 }
 
 export function DangerGauge({ value, size = "md", className }: DangerGaugeProps) {
   const [animatedValue, setAnimatedValue] = useState(0);
   const normalizedValue = Math.min(Math.max(animatedValue, 0), 100);
-  const angle = (normalizedValue / 100) * 360;
 
   // Color function for the gauge
   const getColor = (value: number) => {
@@ -23,16 +19,17 @@ export function DangerGauge({ value, size = "md", className }: DangerGaugeProps)
     return "rgba(239, 68, 68, 0.8)";
   };
 
+  // Size adjustments based on screen width
   const sizeClasses = {
-    sm: "w-32 h-32",
-    md: "w-48 h-48",
-    lg: "w-64 h-64",
+    sm: "w-16 h-16 sm:w-20 sm:h-20 md:w-50 md:h-30 lg:w-80 lg:h-40",
+    md: "w-50 h-30 sm:w-50 sm:h-30 md:w-60 md:h-40 lg:w-80 lg:h-40",
+    lg: "w-80 h-40 sm:w-80 sm:h-40 md:w-80 md:h-40 lg:w-80 lg:h-40",
   };
 
   const textSizeClasses = {
-    sm: "text-xl",
-    md: "text-3xl",
-    lg: "text-4xl",
+    sm: "text-lg",
+    md: "text-2xl",
+    lg: "text-3xl",
   };
 
   useEffect(() => {
@@ -69,9 +66,20 @@ export function DangerGauge({ value, size = "md", className }: DangerGaugeProps)
       aria-valuenow={normalizedValue}
       aria-valuemin={0}
       aria-valuemax={100}>
-      <svg viewBox='0 0 100 100' className='w-full h-full transform -rotate-90'>
-        {/* Background circle */}
-        <circle cx='50' cy='50' r='45' fill='none' stroke='#e5e7eb' strokeWidth='10' />
+      <svg viewBox='0 0 100 50' className=''>
+        {/* Background semi-circle */}
+        <circle
+          cx='50'
+          cy='50'
+          r='45'
+          fill='none'
+          stroke='#e5e7eb'
+          strokeWidth='10'
+          strokeDasharray='141.37'
+          strokeDashoffset='0'
+          strokeLinecap='butt'
+          transform='rotate(180, 50, 50)'
+        />
         {/* Colored arc based on value */}
         <circle
           cx='50'
@@ -80,12 +88,13 @@ export function DangerGauge({ value, size = "md", className }: DangerGaugeProps)
           fill='none'
           stroke={getColor(normalizedValue)}
           strokeWidth='10'
-          strokeLinecap='round'
-          strokeDasharray={`${angle} 360`}
-          strokeDashoffset='0'
+          strokeDasharray='141.37'
+          strokeDashoffset={`${141.35 - (normalizedValue / 100) * 141.37}`}
+          strokeLinecap='butt'
+          transform='rotate(180, 50, 50)'
         />
       </svg>
-      <div className='absolute inset-0 flex items-center justify-center'>
+      <div className='absolute inset-0 flex items-center justify-center xl:mt-28 lg:mt-28 md:mt-24 sm:mt-24 xs:mt-16'>
         <span className={cn("font-bold", textSizeClasses[size])} aria-hidden='true'>
           {normalizedValue}
         </span>
