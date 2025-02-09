@@ -43,7 +43,7 @@ export function PaginatedCardList({ tweets, onPageChange, isLoading }: Paginated
           variant='outline'>
           Previous
         </Button>
-        <span className='text-gray-400 sm:text-xs'>
+        <span className='text-gray-400 '>
           Page {currentPage} of {totalPages}
         </span>
         <Button

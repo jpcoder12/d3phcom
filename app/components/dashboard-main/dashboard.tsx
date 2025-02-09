@@ -40,17 +40,17 @@ const tweetData = [
   { id: 5, Keyword: "Mekong River", Tweets: 25, dangerLevel: 15, date: "2023-06-05" },
 ];
 
-export function Dashboard({ mode, gauge, keywords = [], hvals, tweets }: DataProps) {
+export function Dashboard({ gauge, keywords = [], hvals, tweets }: DataProps) {
   const { newTweets } = tweets;
 
   const sortedQueryKw = Array.from(
     new Map(newTweets.map((tweet) => [tweet.query_kw, tweet])).values()
   );
-
+  // console.log("gauge", gauge);
   return (
     <div className=' bg-black'>
       <div className='px-4 pb-4'>
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+        <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
           <Card className='bg-card border border-card-border rounded-lg p-4'>
             <CardHeader>
               <CardTitle className='text-text-offWhite4 pb-12'>Overall Danger Level</CardTitle>
@@ -101,7 +101,7 @@ export function Dashboard({ mode, gauge, keywords = [], hvals, tweets }: DataPro
                 <AreaChart data={hvals.slice(0, 10)}>
                   <CartesianGrid strokeDasharray='3 3' />
                   <XAxis dataKey='post_date' />
-                  <YAxis />
+                  <YAxis domain={[0, 10]} tickCount={10} allowDecimals={false} />
 
                   <Tooltip
                     contentStyle={{ backgroundColor: "rgba(0, 0, 0, 0.8)", color: "#e5e7eb" }}
