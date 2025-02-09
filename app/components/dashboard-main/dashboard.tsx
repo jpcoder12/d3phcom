@@ -74,14 +74,7 @@ export function Dashboard({ gauge, keywords = [], hvals, tweets }: DataProps) {
                     contentStyle={{ backgroundColor: "black", color: "#e5e7eb" }}
                     cursor={{ fill: "transparent" }}
                   />
-                  <Legend
-                    fill='red'
-                    wrapperStyle={{
-                      borderRadius: 3,
-                      lineHeight: "40px",
-                      width: `20%`,
-                    }}
-                  />
+
                   <Bar
                     dataKey='Tweets'
                     fill='#34586e7d'
@@ -106,13 +99,7 @@ export function Dashboard({ gauge, keywords = [], hvals, tweets }: DataProps) {
                   <Tooltip
                     contentStyle={{ backgroundColor: "rgba(0, 0, 0, 0.8)", color: "#e5e7eb" }}
                   />
-                  <Legend
-                    wrapperStyle={{
-                      borderRadius: 3,
-                      lineHeight: "40px",
-                      width: `20%`,
-                    }}
-                  />
+
                   <Area
                     type='monotone'
                     dataKey='final_gauge'
@@ -125,9 +112,9 @@ export function Dashboard({ gauge, keywords = [], hvals, tweets }: DataProps) {
           </Card>
 
           <Card className='bg-card border border-card-border  rounded-lg p-4'>
-            <CardHeader className=''>
+            {/* <CardHeader className=''>
               <CardTitle className='text-gray-400'>Regional Data</CardTitle>
-            </CardHeader>
+            </CardHeader> */}
             <CardContent>
               <Table>
                 <TableHeader>
