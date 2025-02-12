@@ -39,8 +39,8 @@ export function TweetCard({ tweet }: TweetCardProps) {
         <Link
           href={`https://x.com/MacRumors/status/${tweet.tweet_id}`}
           target='_blank'
-          className='text-blue-500 hover:underline mt-4 block'>
-          View on X (Twitter)
+          className='hover:text-white text-gray-400 mt-4 block'>
+          View Tweet
         </Link>
       </DialogContent>
     </Dialog>
