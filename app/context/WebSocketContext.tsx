@@ -74,10 +74,10 @@ export const WebSocketProvider = ({ children }: { children: React.ReactNode }) =
         ...hval,
         post_date: formatDate(hval.post_date),
       }));
-      setHvals(formattedHvals.reverse());
       if (formattedHvals.length > 0) {
         setGauge(formattedHvals[0].final_gauge * 10);
       }
+      setHvals(formattedHvals.reverse());
     });
     socket.on("tweets", (data: { newTweets: Tweet[]; totalPages: number; currentPage: number }) => {
       setTweets(data);
