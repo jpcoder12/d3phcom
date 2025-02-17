@@ -64,14 +64,14 @@ export function TweetCard({ tweet }: TweetCardProps) {
           <Link
             href={`https://x.com/MacRumors/status/${tweet.tweet_id}`}
             target='_blank'
-            className='hover:text-white text-gray-400 pl-4 block'>
+            className='hover:text-white text-gray-400 pl-4 block py-4'>
             <svg
               role='img'
-              viewBox='0 0 900 24'
+              viewBox='0 0 1500 24'
               xmlns='http://www.w3.org/2000/svg'
               style={{ fill: "#34586e7d" }} // Set the fill color to white
             >
-              <title>X</title>
+              <title>View on X</title>
               <path d='M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z' />
             </svg>
           </Link>
