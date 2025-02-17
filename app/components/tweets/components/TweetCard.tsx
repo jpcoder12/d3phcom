@@ -3,19 +3,24 @@
 import { useState, useEffect } from "react";
 import { socket } from "@/app/socket";
 import { Card, CardContent, CardFooter } from "../../ui/card";
-import { Tweet } from "@/app/types";
+import { Tweet, TweetMetricProps } from "@/app/types";
 import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog";
 import { TweetMetrics } from "../../tweet_metrics";
+// types
 import Link from "next/link";
 
 interface TweetCardProps {
   tweet: Tweet;
-  tweetMetrics: any;
 }
 
 export function TweetCard({ tweet }: TweetCardProps) {
   const [open, setOpen] = useState(false);
-  const [tweetMetrics, setTweetMetrcis] = useState({});
+  const [tweetMetrics, setTweetMetrics] = useState<TweetMetricProps | null>(null);
+
+  const impressions = tweetMetrics?.impressions || [];
+  const likes = tweetMetrics?.likes || [];
+  const retweets = tweetMetrics?.retweets || [];
+  const replies = tweetMetrics?.replies || [];
 
   const truncateText = (text: string, maxLength: number) => {
     return text.length > maxLength ? `${text.slice(0, maxLength)}...` : text;
@@ -29,7 +34,7 @@ export function TweetCard({ tweet }: TweetCardProps) {
 
   useEffect(() => {
     socket.on("tweet_metrics", (data) => {
-      setTweetMetrcis(data);
+      setTweetMetrics(data);
     });
   }, []);
 
@@ -50,15 +55,36 @@ export function TweetCard({ tweet }: TweetCardProps) {
       </DialogTrigger>
 
       <DialogContent className='p-6'>
-        <h2 className='text-lg font-semibold'>Tweet Details</h2>
         <p className='text-gray-300 mt-2'>{tweet.text}</p>
-        <Link
-          href={`https://x.com/MacRumors/status/${tweet.tweet_id}`}
-          target='_blank'
-          className='hover:text-white text-gray-400 mt-4 block'>
-          View Tweet
-        </Link>
-        <TweetMetrics tweetMetrics={tweetMetrics} />
+        <div>
+          <Link
+            href={`https://x.com/MacRumors/status/${tweet.tweet_id}`}
+            target='_blank'
+            className='hover:text-white text-gray-400 pl-4 block'>
+            View Tweet
+          </Link>
+          <div className='grid grid-cols-2 gap-4 p-4'>
+            <TweetMetrics
+              metrics={impressions.map((i) => ({
+                post_date: i.post_date,
+                count: i.num_impressions,
+              }))}
+              label='Impressions'
+            />
+            <TweetMetrics
+              metrics={likes.map((l) => ({ post_date: l.post_date, count: l.num_likes }))}
+              label='Likes'
+            />
+            <TweetMetrics
+              metrics={retweets.map((r) => ({ post_date: r.post_date, count: r.num_retweets }))}
+              label='Retweets'
+            />
+            <TweetMetrics
+              metrics={replies.map((rep) => ({ post_date: rep.post_date, count: rep.num_replies }))}
+              label='Replies'
+            />
+          </div>
+        </div>
       </DialogContent>
     </Dialog>
   );
