@@ -22,6 +22,9 @@ interface TweetMetricProps {
 }
 
 export const TweetMetrics = ({ metrics, label }: TweetMetricProps) => {
+  const sortedMetrics = [...metrics]
+    .reverse()
+    .sort((a, b) => new Date(a.post_date).getTime() - new Date(b.post_date).getTime());
   return (
     <Card className='bg-black border border-card-border rounded-lg p-4'>
       <CardHeader>
@@ -29,11 +32,14 @@ export const TweetMetrics = ({ metrics, label }: TweetMetricProps) => {
       </CardHeader>
       <CardContent>
         <ResponsiveContainer width='100%' height={300}>
-          <AreaChart data={metrics}>
+          <AreaChart data={sortedMetrics}>
             <CartesianGrid strokeDasharray='3 3' />
             <XAxis
               dataKey='post_date'
-              tickFormatter={(tick) => new Date(tick).toLocaleTimeString()}
+              tickFormatter={(tick) => {
+                const date = new Date(tick);
+                return date.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" });
+              }}
             />
             <YAxis domain={[0, "dataMax"]} tickCount={10} allowDecimals={false} />
             <Tooltip contentStyle={{ backgroundColor: "rgba(0, 0, 0, 0.8)", color: "#e5e7eb" }} />

@@ -63,7 +63,7 @@ export function TweetCard({ tweet }: TweetCardProps) {
             className='hover:text-white text-gray-400 pl-4 block'>
             View Tweet
           </Link>
-          <div className='grid grid-cols-2 gap-4 p-4'>
+          <div className='grid  xs:grid-cols-1 sm:grid-cols-2 gap-4 p-4'>
             <TweetMetrics
               metrics={impressions.map((i) => ({
                 post_date: i.post_date,
