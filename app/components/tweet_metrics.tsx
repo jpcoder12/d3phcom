@@ -27,11 +27,11 @@ export const TweetMetrics = ({ metrics, label }: TweetMetricProps) => {
     .sort((a, b) => new Date(a.post_date).getTime() - new Date(b.post_date).getTime());
   return (
     <Card className='bg-black border border-card-border rounded-lg p-4'>
-      <CardHeader>
+      <CardHeader className='p-2'>
         <CardTitle className='text-gray-400'>{label}</CardTitle>
       </CardHeader>
       <CardContent>
-        <ResponsiveContainer width='100%' height={300}>
+        <ResponsiveContainer width='100%' height={180}>
           <AreaChart data={sortedMetrics}>
             <CartesianGrid strokeDasharray='3 3' />
             <XAxis

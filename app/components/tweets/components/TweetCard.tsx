@@ -6,6 +6,7 @@ import { Card, CardContent, CardFooter } from "../../ui/card";
 import { Tweet, TweetMetricProps } from "@/app/types";
 import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog";
 import { TweetMetrics } from "../../tweet_metrics";
+import Image from "next/image";
 // types
 import Link from "next/link";
 
@@ -55,13 +56,24 @@ export function TweetCard({ tweet }: TweetCardProps) {
       </DialogTrigger>
 
       <DialogContent className='p-6'>
-        <p className='text-gray-300 mt-2'>{tweet.text}</p>
         <div>
+          <div className='text-gray-300 mt-2 px-4 pb-2'>
+            <div className='pb-2'>Tweet Metrics</div>
+            <p className=''>{tweet.text}</p>
+          </div>
           <Link
             href={`https://x.com/MacRumors/status/${tweet.tweet_id}`}
             target='_blank'
             className='hover:text-white text-gray-400 pl-4 block'>
-            View Tweet
+            <svg
+              role='img'
+              viewBox='0 0 900 24'
+              xmlns='http://www.w3.org/2000/svg'
+              style={{ fill: "#34586e7d" }} // Set the fill color to white
+            >
+              <title>X</title>
+              <path d='M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z' />
+            </svg>
           </Link>
           <div className='grid  xs:grid-cols-1 sm:grid-cols-2 gap-4 p-4'>
             <TweetMetrics
