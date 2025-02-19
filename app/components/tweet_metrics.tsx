@@ -31,7 +31,7 @@ export const TweetMetrics = ({ metrics, label }: TweetMetricProps) => {
         <CardTitle className='text-gray-400'>{label}</CardTitle>
       </CardHeader>
       <CardContent>
-        <ResponsiveContainer width='100%' height={200}>
+        <ResponsiveContainer width='100%' height={400}>
           <AreaChart data={sortedMetrics}>
             <CartesianGrid strokeDasharray='3 3' />
             <XAxis
