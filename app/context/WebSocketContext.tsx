@@ -75,7 +75,7 @@ export const WebSocketProvider = ({ children }: { children: React.ReactNode }) =
         post_date: formatDate(hval.post_date),
       }));
       if (formattedHvals.length > 0) {
-        setGauge(formattedHvals[0].final_gauge * 10);
+        setGauge(formattedHvals[0].final_gauge);
       }
       setHvals(formattedHvals.reverse());
     });

@@ -11,15 +11,13 @@ export function DangerGauge({ value, size = "md", className }: DangerGaugeProps)
   const [animatedValue, setAnimatedValue] = useState(0);
   const normalizedValue = Math.min(Math.max(animatedValue, 0), 100);
 
-  // Color function for the gauge
-  const getColor = (value: number) => {
-    if (value < 25) return "rgba(34, 197, 94, 0.8)";
-    if (value < 50) return "rgba(234, 179, 8, 0.8)";
-    if (value < 75) return "rgba(249, 115, 22, 0.8)";
+  const getColor = (val: number) => {
+    if (val < 25) return "rgba(18, 234, 68, 0.8)";
+    if (val < 50) return "rgba(242, 255, 0, 0.8)";
+    if (val < 75) return "rgba(234, 12, 12, 0.824)";
     return "rgba(239, 68, 68, 0.8)";
   };
 
-  // Size adjustments based on screen width
   const sizeClasses = {
     sm: "w-16 h-16 sm:w-20 sm:h-20 md:w-50 md:h-30 lg:w-80 lg:h-40",
     md: "w-50 h-30 sm:w-50 sm:h-30 md:w-60 md:h-40 lg:w-80 lg:h-40",
@@ -33,30 +31,25 @@ export function DangerGauge({ value, size = "md", className }: DangerGaugeProps)
   };
 
   useEffect(() => {
-    let startValue = 0;
-    const endValue = value;
+    let start = animatedValue;
+    let startTime: number | null = null;
+    const duration = 1000;
 
-    const duration = 2000; // Duration of the animation in ms
-    const frameRate = 1000 / 60; // Approximately 60 frames per second
-    const totalFrames = Math.round(duration / frameRate);
+    function animate(timestamp: number) {
+      if (!startTime) startTime = timestamp;
+      const progress = (timestamp - startTime) / duration;
+      const nextValue = start + (value - start) * Math.min(progress, 1);
 
-    const increment = (endValue - startValue) / totalFrames;
+      setAnimatedValue(nextValue);
 
-    const animate = () => {
-      if (startValue < endValue) {
-        startValue += increment;
-        setAnimatedValue(Math.min(Math.round(startValue), endValue));
+      if (progress < 1) {
         requestAnimationFrame(animate);
       } else {
-        setAnimatedValue(endValue);
+        setAnimatedValue(value); // Ensure exact final value
       }
-    };
+    }
 
-    animate();
-
-    return () => {
-      setAnimatedValue(0);
-    };
+    requestAnimationFrame(animate);
   }, [value]);
 
   return (
@@ -66,8 +59,7 @@ export function DangerGauge({ value, size = "md", className }: DangerGaugeProps)
       aria-valuenow={normalizedValue}
       aria-valuemin={0}
       aria-valuemax={100}>
-      <svg viewBox='0 0 100 50' className=''>
-        {/* Background semi-circle */}
+      <svg viewBox='0 0 100 50'>
         <circle
           cx='50'
           cy='50'
@@ -80,7 +72,7 @@ export function DangerGauge({ value, size = "md", className }: DangerGaugeProps)
           strokeLinecap='butt'
           transform='rotate(180, 50, 50)'
         />
-        {/* Colored arc based on value */}
+
         <circle
           cx='50'
           cy='50'
@@ -89,14 +81,14 @@ export function DangerGauge({ value, size = "md", className }: DangerGaugeProps)
           stroke={getColor(normalizedValue)}
           strokeWidth='10'
           strokeDasharray='141.37'
-          strokeDashoffset={`${141.35 - (normalizedValue / 100) * 141.37}`}
+          strokeDashoffset={`${141.37 - (normalizedValue / 10) * 141.37}`}
           strokeLinecap='butt'
           transform='rotate(180, 50, 50)'
         />
       </svg>
       <div className='absolute inset-0 flex items-center justify-center xl:mt-28 lg:mt-28 md:mt-24 sm:mt-24 xs:mt-16'>
         <span className={cn("font-bold", textSizeClasses[size])} aria-hidden='true'>
-          {normalizedValue}
+          {normalizedValue.toFixed(1)}
         </span>
       </div>
     </div>
