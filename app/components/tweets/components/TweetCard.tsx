@@ -74,14 +74,14 @@ export function TweetCard({ tweet }: TweetCardProps) {
       case "tweetText":
         return (
           <div>
-            <div className='text-gray-300 mt-2 px-4 pb-2'>
+            <div className='text-slate-800 text-sm mt-2 px-4 pb-2'>
               <div className='pb-2'>Tweet Metrics</div>
               <p>{tweet.text}</p>
             </div>
             <Link
               href={`https://x.com/MacRumors/status/${tweet.tweet_id}`}
               target='_blank'
-              className='hover:text-white text-gray-400 pl-4 block py-4'>
+              className='hover:text-white text-gray-400 text-sm pl-4 block py-4'>
               <svg
                 role='img'
                 viewBox='0 0 1500 24'
@@ -109,11 +109,11 @@ export function TweetCard({ tweet }: TweetCardProps) {
       <DialogTrigger asChild>
         <Card
           onClick={() => handleTweetMetrics(tweet.tweet_id)}
-          className='xs:w-[400px] xs:h-[200px] sm:w-[500px] md:w-[500px] lg:w-[300px] xl:w-[400px] xl:h-[280px] 4xl:h-[290px] 4xl:w-[780px] flex flex-col bg-card border border-card-border hover:bg-[#34586e7d] rounded-lg cursor-pointer'>
-          <CardContent className='flex-grow pt-4 text-gray-400'>
+          className='xs:w-[400px] xs:h-[200px] sm:w-[500px] md:w-[500px] lslate-800px] xl:w-[400px] xl:h-[280px] 4xl:h-[290px] 4xl:w-[780px] flex flex-col bg-card border border-card-border hover:bg-[#34586e7d] rounded-lg cursor-pointer'>
+          <CardContent className='flex-grow pt-4 text-gray-400 text-sm'>
             <p className='text-base'>{truncateText(tweet.text, 100)}</p>
           </CardContent>
-          <CardFooter className='text-sm text-gray-400'>
+          <CardFooter className='text-sm text-gray-400 text-sm'>
             <p>Query: {tweet.query_kw}</p>
             <p className='ml-auto'>Tweet ID: {tweet.tweet_id}</p>
           </CardFooter>
@@ -122,50 +122,60 @@ export function TweetCard({ tweet }: TweetCardProps) {
 
       <DialogContent className='p-6'>
         <div>
-          <div className='flex mb-4'>
+          <div className='flex mb-4 gap-2'>
             <button
-              className={`mr-4 text-sm ${
-                selectedTab === "tweetText" ? "text-white" : "text-gray-400"
+              className={`text-sm ${
+                selectedTab === "tweetText" ? "text-white" : "text-gray-400 text-sm"
               }`}
               onClick={() => setSelectedTab("tweetText")}>
               Tweet
             </button>
 
-            {hasImpressionsData && (
+            {hasImpressionsData ? (
               <button
-                className={`mr-4 text-sm ${
-                  selectedTab === "impressions" ? "text-white" : "text-gray-400"
+                className={`text-sm ${
+                  selectedTab === "impressions" ? "text-white" : "text-gray-400 text-sm"
                 }`}
                 onClick={() => setSelectedTab("impressions")}>
                 Impressions
               </button>
+            ) : (
+              <div className='text-slate-800 text-sm'>Impressions</div>
             )}
 
-            {hasLikesData && (
+            {hasLikesData ? (
               <button
-                className={`mr-4 text-sm ${
-                  selectedTab === "likes" ? "text-white" : "text-gray-400"
+                className={`text-sm ${
+                  selectedTab === "likes" ? "text-white" : "text-gray-400 text-sm"
                 }`}
                 onClick={() => setSelectedTab("likes")}>
                 Likes
               </button>
+            ) : (
+              <div className='text-slate-800 text-sm'>Likes</div>
             )}
 
-            {hasRetweetsData && (
+            {hasRetweetsData ? (
               <button
-                className={`mr-4 text-sm ${
-                  selectedTab === "retweets" ? "text-white" : "text-gray-400"
+                className={`text-sm ${
+                  selectedTab === "retweets" ? "text-white" : "text-gray-400 text-sm"
                 }`}
                 onClick={() => setSelectedTab("retweets")}>
                 Retweets
               </button>
+            ) : (
+              <div className='text-slate-800 text-sm'>Retweets</div>
             )}
-            {hasRepliesData && (
+            {hasRepliesData ? (
               <button
-                className={`text-sm ${selectedTab === "replies" ? "text-white" : "text-gray-400"}`}
+                className={`text-sm ${
+                  selectedTab === "replies" ? "text-white" : "text-gray-400 text-sm"
+                }`}
                 onClick={() => setSelectedTab("replies")}>
                 Replies
               </button>
+            ) : (
+              <div className='text-slate-800 text-sm'>No Replies</div>
             )}
           </div>
           {renderGraph()}
