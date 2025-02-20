@@ -24,6 +24,7 @@ const config: Config = {
         text: {
           primary: "rgba(180, 210, 255, 0.85)",
           secondary: "rgba(150, 190, 235, 0.8)",
+          tertiary: "#34586e7d",
           muted: "rgba(130, 170, 210, 0.7)",
           highlight: "rgba(130, 230, 255, 0.9)",
           accent: "rgba(200, 230, 255, 0.95)",

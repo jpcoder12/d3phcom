@@ -34,7 +34,6 @@ export function PaginatedCardList({ tweets, onPageChange, isLoading }: Paginated
         </div>
       )}
 
-      {/* Pagination controls */}
       <div className='flex justify-between items-center mt-8'>
         <Button
           className='bg-card border border-card-border rounded-lg'
