@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import AuthButton from "../auth-component/AuthButton";
 
 // UI
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/dashboard-main/ui/card";
@@ -49,6 +50,7 @@ export function Dashboard({ gauge, keywords = [], hvals, tweets }: DataProps) {
   // console.log("gauge", gauge);
   return (
     <div className=' bg-black'>
+      <AuthButton />
       <div className='px-4 pb-4'>
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
           <Card className='bg-card border border-card-border rounded-lg p-4'>
