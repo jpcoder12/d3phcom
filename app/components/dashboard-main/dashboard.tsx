@@ -43,6 +43,7 @@ const tweetData = [
 
 export function Dashboard({ gauge, keywords = [], hvals, tweets }: DataProps) {
   const { newTweets } = tweets;
+  console.log(hvals);
 
   const sortedQueryKw = Array.from(
     new Map(newTweets.map((tweet) => [tweet.query_kw, tweet])).values()
@@ -86,12 +87,19 @@ export function Dashboard({ gauge, keywords = [], hvals, tweets }: DataProps) {
               </ResponsiveContainer>
             </CardContent>
           </Card>
-
+        </div>
+        <div className=' pt-8 pb-4'>
           <Card className='bg-card border border-card-border rounded-lg p-4'>
             <CardHeader>
               <CardTitle className='text-gray-400'>Danger Level Trend</CardTitle>
             </CardHeader>
             <CardContent>
+              {/* <div className='flex flex-row gap-4'>
+                <button>7 days</button>
+                <button>1 month</button>
+                <button>3 months</button>
+                <button>All time</button>
+              </div> */}
               <ResponsiveContainer width='100%' height={300}>
                 <AreaChart data={hvals.slice(0, 10)}>
                   <CartesianGrid strokeDasharray='3 3' />
@@ -110,34 +118,6 @@ export function Dashboard({ gauge, keywords = [], hvals, tweets }: DataProps) {
                   />
                 </AreaChart>
               </ResponsiveContainer>
-            </CardContent>
-          </Card>
-
-          <Card className='bg-card border border-card-border  rounded-lg p-4'>
-            {/* <CardHeader className=''>
-              <CardTitle className='text-gray-400'>Regional Data</CardTitle>
-            </CardHeader> */}
-            <CardContent>
-              <Table>
-                <TableHeader>
-                  <TableRow className='text-gray-400'>
-                    <TableHead>Keywords</TableHead>
-                    <TableHead>Tweet ID</TableHead>
-                    <TableHead>Danger Level</TableHead>
-                    <TableHead>Date</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {keywords &&
-                    keywords.map((data) => (
-                      <TableRow className='text-gray-400' key={data._id || data.kw_string}>
-                        <TableCell>{data.kw_string || "N/A"}</TableCell>
-                        <TableCell>{data._id || "N/A"}</TableCell>
-                        <TableCell>{gauge}</TableCell>
-                      </TableRow>
-                    ))}
-                </TableBody>
-              </Table>
             </CardContent>
           </Card>
         </div>
