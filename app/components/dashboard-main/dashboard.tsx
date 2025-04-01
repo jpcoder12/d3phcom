@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import AuthButton from "../auth-component/AuthButton";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 // UI
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/dashboard-main/ui/card";
@@ -43,7 +44,7 @@ const tweetData = [
 
 export function Dashboard({ gauge, keywords = [], hvals, tweets }: DataProps) {
   const { newTweets } = tweets;
-  console.log(hvals);
+  const { data: session, status } = useSession();
 
   const sortedQueryKw = Array.from(
     new Map(newTweets.map((tweet) => [tweet.query_kw, tweet])).values()
@@ -62,31 +63,32 @@ export function Dashboard({ gauge, keywords = [], hvals, tweets }: DataProps) {
               <DangerGauge value={gauge} size='lg' />
             </CardContent>
           </Card>
+          {session ? (
+            <Card className='bg-card border border-card-border  rounded-lg p-4'>
+              <CardHeader>
+                <CardTitle className='text-gray-400'>Keywords</CardTitle>
+              </CardHeader>
+              <CardContent className='text-gray-400'>
+                <ResponsiveContainer width='100%' height={300}>
+                  <BarChart data={tweetData}>
+                    <CartesianGrid strokeDasharray='3 3' />
+                    <XAxis dataKey='Keyword' />
+                    <YAxis />
+                    <Tooltip
+                      contentStyle={{ backgroundColor: "black", color: "#e5e7eb" }}
+                      cursor={{ fill: "transparent" }}
+                    />
 
-          <Card className='bg-card border border-card-border  rounded-lg p-4'>
-            <CardHeader>
-              <CardTitle className='text-gray-400'>Keywords</CardTitle>
-            </CardHeader>
-            <CardContent className='text-gray-400'>
-              <ResponsiveContainer width='100%' height={300}>
-                <BarChart data={tweetData}>
-                  <CartesianGrid strokeDasharray='3 3' />
-                  <XAxis dataKey='Keyword' />
-                  <YAxis />
-                  <Tooltip
-                    contentStyle={{ backgroundColor: "black", color: "#e5e7eb" }}
-                    cursor={{ fill: "transparent" }}
-                  />
-
-                  <Bar
-                    dataKey='Tweets'
-                    fill='#34586e7d'
-                    activeBar={{ stroke: "white", strokeWidth: 1 }}
-                  />
-                </BarChart>
-              </ResponsiveContainer>
-            </CardContent>
-          </Card>
+                    <Bar
+                      dataKey='Tweets'
+                      fill='#34586e7d'
+                      activeBar={{ stroke: "white", strokeWidth: 1 }}
+                    />
+                  </BarChart>
+                </ResponsiveContainer>
+              </CardContent>
+            </Card>
+          ) : null}
         </div>
         <div className=' pt-8 pb-4'>
           <Card className='bg-card border border-card-border rounded-lg p-4'>
