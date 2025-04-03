@@ -89,7 +89,8 @@ const useSocket = (): SocketData => {
 
       // Update gauge if needed
       if (formattedHvals.length > 0) {
-        setGauge(formattedHvals[-1].final_gauge);
+        let gauge = formattedHvals[formattedHvals.length - 1].final_gauge;
+        setGauge(gauge);
       }
     });
 
