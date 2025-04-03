@@ -103,7 +103,7 @@ export function Dashboard({ gauge, keywords = [], hvals, tweets }: DataProps) {
                 <button>All time</button>
               </div> */}
               <ResponsiveContainer width='100%' height={300}>
-                <AreaChart data={hvals.slice(0, 10)}>
+                <AreaChart data={hvals.slice(0, 10).reverse()}>
                   <CartesianGrid strokeDasharray='3 3' />
                   <XAxis dataKey='post_date' />
                   <YAxis domain={[0, 10]} tickCount={10} allowDecimals={false} />
