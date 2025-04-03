@@ -84,7 +84,7 @@ const useSocket = (): SocketData => {
         post_date: formatDate(hval.post_date),
       }));
 
-      setHvals(formattedHvals.reverse());
+      setHvals(formattedHvals);
       console.log("Formatted hvals:", formattedHvals);
 
       // Update gauge if needed
