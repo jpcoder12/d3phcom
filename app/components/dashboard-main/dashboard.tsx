@@ -48,7 +48,8 @@ export function Dashboard({ gauge, keywords = [], hvals, tweets }: DataProps) {
   const sortedQueryKw = Array.from(
     new Map(newTweets.map((tweet) => [tweet.query_kw, tweet])).values()
   );
-  // console.log("gauge", gauge);
+  console.log("gauge", gauge);
+  console.log(hvals);
   return (
     <div className=' bg-black'>
       <AuthButton />
