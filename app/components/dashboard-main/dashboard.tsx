@@ -45,7 +45,7 @@ const tweetData = [
 export function Dashboard({ gauge, keywords = [], hvals, tweets }: DataProps) {
   const { newTweets } = tweets;
   const { data: session, status } = useSession();
-
+  console.log(hvals);
   const sortedQueryKw = Array.from(
     new Map(newTweets.map((tweet) => [tweet.query_kw, tweet])).values()
   );
