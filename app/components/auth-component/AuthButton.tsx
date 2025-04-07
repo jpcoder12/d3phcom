@@ -10,19 +10,19 @@ export default function AuthButton() {
   }
 
   return (
-    <div className='p-4 border rounded-md shadow-md text-center'>
+    <div className='p-4 shadow-md text-left'>
       {session ? (
         <div>
           <p className='mb-2 text-green-600'>✅ Signed in as {session.user?.email}</p>
           <button
             onClick={() => signOut()}
-            className='bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md transition'>
+            className='bg-red-500 hover:bg-red-600 text-white px-4 py-2  transition'>
             Sign Out
           </button>
 
           {/* Content shown only to logged-in users */}
           <div className='mt-4 p-4 bg-green-500 text-white rounded-md shadow-md'>
-            🌟 Secret Content Just for You!
+            Signed in successfuly
           </div>
         </div>
       ) : (
@@ -30,7 +30,7 @@ export default function AuthButton() {
           <p className='mb-2 text-red-600'>❌ Not signed in</p>
           <button
             onClick={() => signIn("google")}
-            className='bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md transition'>
+            className='  text-white px-4 py-2 rounded-md transition'>
             Sign In with Google
           </button>
         </div>

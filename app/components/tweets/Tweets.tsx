@@ -42,11 +42,7 @@ const Tweets: React.FC = () => {
   return (
     <div className='bg-black  flex align-middle justify-center text-gray-400 m:mt-8 xxs:pt-10 xl:pt-20 '>
       <div className='p-4 flex items-center'>
-        <PaginatedCardList
-          tweets={tweets}
-          onPageChange={handlePageChange}
-          isLoading={isLoading} // Pass the loading state to the child component
-        />
+        <PaginatedCardList tweets={tweets} onPageChange={handlePageChange} isLoading={isLoading} />
       </div>
     </div>
   );
