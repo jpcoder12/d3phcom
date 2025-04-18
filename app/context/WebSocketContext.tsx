@@ -5,7 +5,7 @@ import { socket } from "../socket";
 
 interface Hval {
   _id?: string;
-  final_gauge: number;
+  final_gauge_score: number;
   post_date: string;
 }
 
@@ -53,7 +53,7 @@ export const WebSocketProvider = ({ children }: { children: React.ReactNode }) =
         post_date: formatDate(hval.post_date),
       }));
       if (formattedHvals.length > 0) {
-        setGauge(formattedHvals[0].final_gauge);
+        setGauge(formattedHvals[0].final_gauge_score);
       }
 
       setHvals(formattedHvals);

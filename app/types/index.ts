@@ -8,7 +8,7 @@ export interface DataProps {
   isLoading: boolean;
   hvals: {
     _id?: string;
-    final_gauge: number;
+    final_gauge_score: number;
     post_date: string;
   }[];
 }

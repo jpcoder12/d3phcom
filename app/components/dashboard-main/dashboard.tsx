@@ -103,7 +103,7 @@ export function Dashboard({ gauge, keywords = [], hvals }: DataProps) {
 
                   <Area
                     type='monotone'
-                    dataKey='final_gauge'
+                    dataKey='final_gauge_score'
                     stroke='#ffffffd3'
                     fillOpacity={0.1}
                   />
