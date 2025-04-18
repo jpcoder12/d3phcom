@@ -1,14 +1,11 @@
-// src/context/WebSocketContext.tsx
 "use client";
 
 import React, { createContext, useContext, useEffect, useRef, useState } from "react";
 import { socket } from "../socket";
-import type { Tweet } from "../types";
 
-// Define types
 interface Hval {
   _id?: string;
-  final_gauge: number;
+  final_gauge_score: number;
   post_date: string;
 }
 
@@ -20,12 +17,6 @@ interface WebSocketContextData {
   keywords: { _id?: string; kw_string: string }[];
   isLoading: boolean;
   hvals: Hval[];
-  tweets: {
-    newTweets: Tweet[];
-    totalPages: number;
-    currentPage: number;
-  };
-  fetchPage: (page: number) => void;
 }
 
 const WebSocketContext = createContext<WebSocketContextData | undefined>(undefined);
@@ -38,19 +29,6 @@ export const WebSocketProvider = ({ children }: { children: React.ReactNode }) =
   const [keywords, setKeywords] = useState<{ _id?: string; kw_string: string }[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [hvals, setHvals] = useState<Hval[]>([]);
-  const [tweets, setTweets] = useState<{
-    newTweets: Tweet[];
-    totalPages: number;
-    currentPage: number;
-  }>({
-    newTweets: [],
-    totalPages: 1,
-    currentPage: 1,
-  });
-
-  const fetchPage = (page: number) => {
-    socket.emit("getTweets", { page });
-  };
 
   const formatDate = (dateString: string): string => {
     const date = new Date(dateString);
@@ -75,13 +53,10 @@ export const WebSocketProvider = ({ children }: { children: React.ReactNode }) =
         post_date: formatDate(hval.post_date),
       }));
       if (formattedHvals.length > 0) {
-        setGauge(formattedHvals[0].final_gauge);
+        setGauge(formattedHvals[0].final_gauge_score);
       }
 
       setHvals(formattedHvals);
-    });
-    socket.on("tweets", (data: { newTweets: Tweet[]; totalPages: number; currentPage: number }) => {
-      setTweets(data);
     });
 
     return () => {
@@ -90,7 +65,6 @@ export const WebSocketProvider = ({ children }: { children: React.ReactNode }) =
       socket.off("mode");
       socket.off("kws");
       socket.off("hvals");
-      socket.off("tweets");
     };
   }, []);
 
@@ -104,8 +78,6 @@ export const WebSocketProvider = ({ children }: { children: React.ReactNode }) =
         keywords,
         isLoading,
         hvals,
-        tweets,
-        fetchPage,
       }}>
       {children}
     </WebSocketContext.Provider>

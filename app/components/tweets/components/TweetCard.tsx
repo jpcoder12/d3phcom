@@ -107,7 +107,7 @@ export function TweetCard({ tweet }: TweetCardProps) {
       </DialogTrigger>
 
       <DialogContent className='p-6'>
-        <div className='flex justify-center flex-col'>
+        <div className='lg:flex justify-center flex-col xxs:block sm:block'>
           <header className='mx-auto mb-6 mt-4'>Tweet Metrics</header>
           {/* <Link
               href={`https://x.com/MacRumors/status/${tweet.tweet_id}`}
@@ -124,7 +124,7 @@ export function TweetCard({ tweet }: TweetCardProps) {
               </svg>
             </Link> */}
 
-          <div className='flex justify-center mb-6 gap-2'>
+          <div className='lg:flex justify-center mb-6 gap-2 xxs:block '>
             <Button
               className={`text-sm ${
                 selectedTab === "tweetText" ? "text-white" : "text-gray-400 text-sm"

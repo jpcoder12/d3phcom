@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import AuthButton from "../auth-component/AuthButton";
 import { signIn, signOut, useSession } from "next-auth/react";
 
@@ -20,20 +20,12 @@ import {
   AreaChart,
   Area,
 } from "recharts";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/app/components/dashboard-main/ui/table";
 // components
 import { DangerGauge } from "./danger-gauge";
 // types
 import { DataProps } from "@/app/types";
 
-// Sample data - replace this with your actual data
+// Sample data - replace with actual data for bar chart
 const tweetData = [
   { id: 1, Keyword: "South China Sea", Tweets: 45, dangerLevel: 30, date: "2023-06-01" },
   { id: 2, Keyword: "Taiwan Strait", Tweets: 80, dangerLevel: 60, date: "2023-06-02" },
@@ -42,12 +34,9 @@ const tweetData = [
   { id: 5, Keyword: "Mekong River", Tweets: 25, dangerLevel: 15, date: "2023-06-05" },
 ];
 
-export function Dashboard({ gauge, keywords = [], hvals, tweets }: DataProps) {
-  const { newTweets } = tweets;
+export function Dashboard({ gauge, keywords = [], hvals }: DataProps) {
   const { data: session, status } = useSession();
-  const sortedQueryKw = Array.from(
-    new Map(newTweets.map((tweet) => [tweet.query_kw, tweet])).values()
-  );
+
   console.log("gauge", gauge);
   console.log(hvals);
   return (
@@ -55,9 +44,9 @@ export function Dashboard({ gauge, keywords = [], hvals, tweets }: DataProps) {
       <AuthButton />
       <div className='px-4 pb-4'>
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
-          <Card className='bg-card border border-card-border rounded-lg p-4'>
-            <CardHeader>
-              <CardTitle className='text-text-offWhite4 pb-12'>Overall Danger Level</CardTitle>
+          <Card className='bg-card border border-card-border rounded-lg lg:p-4'>
+            <CardHeader className='pb-4'>
+              <CardTitle className='text-text-offWhite4 pb-2'>Overall Danger Level</CardTitle>
             </CardHeader>
             <CardContent className='flex justify-center items-center'>
               <DangerGauge value={gauge} size='lg' />
@@ -114,7 +103,7 @@ export function Dashboard({ gauge, keywords = [], hvals, tweets }: DataProps) {
 
                   <Area
                     type='monotone'
-                    dataKey='final_gauge'
+                    dataKey='final_gauge_score'
                     stroke='#ffffffd3'
                     fillOpacity={0.1}
                   />
