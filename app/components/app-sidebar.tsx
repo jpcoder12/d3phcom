@@ -29,21 +29,27 @@ const navItems = [
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { method } = useWebSocket();
   return (
-    <Sidebar className='bg-black text-white border-card' {...props}>
-      <SidebarHeader className='border-b border-black bg-black '></SidebarHeader>
-      <SidebarContent className='bg-black border-card'>
-        <SidebarGroup className='bg-black '>
-          <SidebarGroupLabel className='text-gray-400 text-xl '>D3phcom</SidebarGroupLabel>
-          <SidebarGroupLabel className='text-gray-400 text-sm '>{method}</SidebarGroupLabel>
-          <SidebarGroupContent className='bg-black hover:bg-black'>
-            <SidebarMenu className='mt-2'>
+    <Sidebar className=' text-white border-card' {...props}>
+      <SidebarContent
+        className=' border-card'
+        style={{
+          background:
+            "linear-gradient(90deg, rgba(8, 8, 8, 0.89) 35%, rgba(0, 0, 0, 0.2) 100%, rgba(6, 6, 6, 1) 1%, rgba(13, 13, 13, 0.06) 0%)",
+        }}>
+        <SidebarHeader className=' bg-transparent flex mr-auto ml-auto mt-6'>D3PH</SidebarHeader>
+        <SidebarGroup className='bg-transparent '>
+          <SidebarGroupLabel className='text-gray-400 text-sm '>
+            <img src='line.svg' alt='Line' />
+          </SidebarGroupLabel>
+          <SidebarGroupContent className='bg-transparent hover:bg-transparent'>
+            <SidebarMenu>
               {navItems.map((item) => (
                 <SidebarMenuItem key={item.label}>
-                  <SidebarMenuButton asChild className='hover:bg-black '>
+                  <SidebarMenuButton asChild className='hover:bg-transparent '>
                     <Link
                       href={item.href}
                       passHref
-                      className='flex items-center gap-3 text-gray-400 hover:bg-black hover:text-white bg-black'>
+                      className='flex items-center gap-3 text-gray-400 hover:bg-transparent hover:text-white bg-transparent'>
                       <item.icon className='h-4 w-4' />
                       <span>{item.label}</span>
                     </Link>

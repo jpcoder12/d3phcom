@@ -40,8 +40,24 @@ const Tweets: React.FC = () => {
   };
 
   return (
-    <div className='bg-black  flex align-middle justify-center text-gray-400 m:mt-8 xxs:pt-10 xl:pt-20 '>
-      <div className='p-4 flex items-center'>
+    <div className='  text-white m:mt-8 xxs:pt-10 xl:pt-20 bg-black/10 rounded-2xl mx-6'>
+      <div className='px-8 bg-black/70 rounded-2xl '>
+        <div className='flex justify-between'>
+          <div>
+            <img src='' alt='twitter_logo' />
+            <h3>X Posts</h3>
+            <div>
+              <span>latest posts</span>
+              <span>5 mins ago</span>
+              <p>X posts picked up by our system that feature relevent keywords</p>
+            </div>
+          </div>
+          <div className='flex flex-col text-center gap-0'>
+            <span>Current</span>
+            <span>8.3</span>
+            <span>Danger level</span>
+          </div>
+        </div>
         <PaginatedCardList tweets={tweets} onPageChange={handlePageChange} isLoading={isLoading} />
       </div>
     </div>

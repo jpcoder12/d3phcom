@@ -19,17 +19,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body className={`${inter.className} bg-black text-white`}>
+      <body className={`${inter.className} text-white`}>
         <SessionProvider session={session}>
           <WebSocketProvider>
-            <SidebarProvider defaultOpen={false}>
+            <SidebarProvider defaultOpen={true}>
               <AppSidebar />
               <SidebarInset className='flex flex-col flex-1 border-card-border'>
-                <header className='flex h-14 lg:h-[60px] items-center gap-4 border-gray-800  px-6 fixed w-full'>
-                  <SidebarTrigger className='text-white' />
-                  <div className='flex-1'>{/* Add  header content here */}</div>
-                </header>
-                <main className='flex-1 overflow-auto bg-black'>{children}</main>
+                <main className='flex-1 overflow-auto '>{children}</main>
               </SidebarInset>
             </SidebarProvider>
           </WebSocketProvider>

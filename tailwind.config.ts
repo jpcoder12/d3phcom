@@ -12,6 +12,8 @@ const config: Config = {
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "black-gradient":
+          "linear-gradient(90deg, rgba(8, 8, 8, 0.89) 35%, rgba(0, 0, 0, 0.2) 100%, rgba(6, 6, 6, 1) 1%, rgba(13, 13, 13, 0.06) 0%)",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -21,6 +23,8 @@ const config: Config = {
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        cardHover: "rgba(0, 0, 0, 0.2)",
+        cardBorder: "rgba(201, 201, 201, 0.13)",
         text: {
           primary: "rgba(180, 210, 255, 0.85)",
           secondary: "rgba(150, 190, 235, 0.8)",
