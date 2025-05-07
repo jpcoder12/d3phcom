@@ -19,7 +19,7 @@ export function PaginatedCardList({ tweets, onPageChange, isLoading }: Paginated
   const { newTweets = [], currentPage = 1, totalPages = 1 } = tweets || {};
 
   return (
-    <div className=''>
+    <div className='px-[200px] border border-cardBorder '>
       {isLoading ? (
         <div className='grid grid-cols-1  '>
           {[...Array(9)].map((_, index) => (
