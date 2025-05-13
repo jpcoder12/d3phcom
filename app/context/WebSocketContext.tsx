@@ -55,7 +55,7 @@ export const WebSocketProvider = ({ children }: { children: React.ReactNode }) =
       if (formattedHvals.length > 0) {
         setGauge(formattedHvals[0].final_gauge_score);
       }
-
+      console.log(formattedHvals);
       setHvals(formattedHvals);
     });
 

@@ -40,8 +40,8 @@ export function Dashboard({ gauge, keywords = [], hvals }: DataProps) {
   console.log("gauge", gauge);
   console.log(hvals);
   return (
-    <div className=' bg-black'>
-      <AuthButton />
+    <div>
+      {/* <AuthButton /> */}
       <div className='px-4 pb-4'>
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
           <Card className='bg-card border border-card-border rounded-lg lg:p-4'>

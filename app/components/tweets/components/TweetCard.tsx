@@ -95,9 +95,9 @@ export function TweetCard({ tweet }: TweetCardProps) {
       <DialogTrigger asChild>
         <Card
           onClick={() => handleTweetMetrics(tweet.tweet_id)}
-          className='xs:w-[400px] xs:h-[200px] sm:w-[500px] md:w-[500px] lslate-800px] xl:w-[400px] xl:h-[280px] 4xl:h-[290px] 4xl:w-[780px] flex flex-col bg-card border border-card-border hover:bg-[#34586e7d] rounded-lg cursor-pointer'>
-          <CardContent className='flex-grow pt-4 text-gray-400 text-sm'>
-            <p className='text-base'>{truncateText(tweet.text, 100)}</p>
+          className='flex flex-col bg-card border border-x-cardBorder border-t-0 border-b-cardBorder rounded-r hover:bg-cardHover rounded-lg cursor-pointer'>
+          <CardContent className='flex-grow pt-4 text-white text-sm'>
+            <p className='text-base'>{truncateText(tweet.text, 400)}</p>
           </CardContent>
           <CardFooter className='text-sm text-gray-400 '>
             <p>Query: {tweet.query_kw}</p>
@@ -106,7 +106,7 @@ export function TweetCard({ tweet }: TweetCardProps) {
         </Card>
       </DialogTrigger>
 
-      <DialogContent className='p-6'>
+      <DialogContent className='p-6 border border-cardBorder'>
         <div className='lg:flex justify-center flex-col xxs:block sm:block'>
           <header className='mx-auto mb-6 mt-4'>Tweet Metrics</header>
           {/* <Link

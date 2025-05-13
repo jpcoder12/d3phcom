@@ -22,6 +22,7 @@ interface TweetMetricProps {
 }
 
 export const TweetMetrics = ({ metrics, label }: TweetMetricProps) => {
+  console.log(metrics);
   const sortedMetrics = [...metrics]
     .reverse()
     .sort((a, b) => new Date(a.post_date).getTime() - new Date(b.post_date).getTime());
